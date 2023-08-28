@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$ls -A ~/.dotfiles" ]; then
+	echo "dotfiles directory is not empty, cancelling execution..."
+	exit
+fi
+	
+
 sudo pacman -Syu
 sudo pacman -S --needed base-devel 
 sudo pacman -S --needed git
