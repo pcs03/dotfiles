@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo pacman -Syu
-sudo pacman -S base-devel git 
+sudo pacman -S --needed base-devel git 
 
 git clone https://github.com/pcs03/dotfiles.git ~/.dotfiles
 
