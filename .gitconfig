@@ -1,0 +1,9 @@
+[credential]
+	helper = store
+[user]
+	email = 123316024+pcs03@users.noreply.github.com 
+	name = pstet
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
