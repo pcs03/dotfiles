@@ -1,0 +1,5 @@
+git-completion 2.0-1
+jdk17-temurin 17.0.8.u7-1
+postman-bin 10.17.0-1
+proton-ge-custom-bin 1:GE_Proton8_13-1
+visual-studio-code-bin 1.81.1-1
