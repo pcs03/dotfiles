@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$(ls -a ~/.dotfiles)" ]; then
+if [ -d ~/.dotfiles ]; then
 	echo "dotfiles directory is not empty, cancelling execution..."
 	exit
 fi
