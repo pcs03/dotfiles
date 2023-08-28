@@ -38,4 +38,5 @@ yay -S --needed --noconfirm --nocleanmenu --nodiffmenu - < ~/.dotfiles/yay.txt
 
 ln -s ~/.dotfiles/.bashrc ~/.bashrc 
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 

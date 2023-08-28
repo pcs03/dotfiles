@@ -79,8 +79,6 @@ alias 'fgrep'='fgrep --color=auto'
 alias 'code'='code --profile UserProfile'
 alias 'vim'='nvim'
 
-alias 'fuck'='sudo !!'
-
 dusort() {
 	du -h "$1" --max-depth=1 | sort -h
 }
