@@ -1,5 +1,0 @@
-git-completion
-jdk17-temurin
-postman-bin
-proton-ge-custom-bin
-visual-studio-code-bin

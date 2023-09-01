@@ -5,15 +5,16 @@ if [ -d ~/.dotfiles ]; then
 	exit
 fi
 	
-
+echo "Synchronizing pacman..."
 sudo pacman -Syu
-sudo pacman -S --needed base-devel 
-sudo pacman -S --needed git
 
+echo "Installing packages..."
+sudo pacman -S --needed base-devel git bash-completion bluez bluez-utils ethtool exa exfat-utils firefox neofetch neovim nodejs npm noto-fonts noto-fonts-cjk noto-fonts-extra ntfs-3g obsidian qbittorrent rsync steam sushi thunderbird vim virtualbox virtualbox-host-modules-arch docker
+
+echo "Cloning git dotfiles repository..."
 git clone https://github.com/pcs03/dotfiles.git ~/.dotfiles
 
-sudo pacman -S --needed - < ~/.dotfiles/pacman.txt
-
+echo "Installing yay AUR helper..."
 if command -v yay &>/dev/null; then
 	echo "yay is already installed."
 else
@@ -34,9 +35,19 @@ else
 	fi
 fi
 
-yay -S --needed --noconfirm --nocleanmenu --nodiffmenu - < ~/.dotfiles/yay.txt
+echo "Installing AUR packages..."
+yay -S --needed --noconfirm --nocleanmenu --nodiffmenu git-completion jdk17-temurin postman-bin proton-ge-custom-bin visual-studio-code-bin
 
-ln -s ~/.dotfiles/.bashrc ~/.bashrc 
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
+echo "Creating symlinks to custom dotfiles..."
+cd ~/.dotfiles
 
+for dotfile in .*; do
+	if [ -f "$dotfile" ] && [ "$dotfile" != ".git" ]; then
+		echo "Creating symlink for $dotfile"
+		rm -f ~/"$dotfile"
+		ln -s ~/.dotfiles/"$dotfile" ~/"$dotfile"
+
+
+echo "Enabling & Starting docker"
+sudo systemctl enable docker
+sudo systemctl start docker
