@@ -2,7 +2,7 @@
 
 if [ -d ~/.dotfiles ]; then
 	echo "dotfiles directory is not empty, what to do?"
- 	read -p "[P]ull [O]verwrite [N]othing [E]xit" choice
+ 	read -p "[P]ull [O]verwrite [N]othing [E]xit \n" choice
   	if [[ $choice == [pP] ]]; then
    		cd ~/.dotfiles
      		git pull
