@@ -1,7 +1,17 @@
 #!/bin/bash
 
 if [ -d ~/.dotfiles ]; then
-	echo "dotfiles directory is not empty, cancelling execution..."
+	echo "dotfiles directory is not empty, what to do?"
+ 	read -p "[P]ull [O]verwrite [N]othing" choice
+  	if [[ $choice == [pP] ]]; then
+   		cd ~/.dotfiles
+     		git pull
+       	fi
+
+ 	if [[ $choice == [oO] ]]; then
+  		rm -rf ~/.dotfiles
+    	fi
+       
 	exit
 fi
 	
