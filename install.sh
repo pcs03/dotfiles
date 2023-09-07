@@ -2,7 +2,7 @@
 
 if [ -d ~/.dotfiles ]; then
 	echo "dotfiles directory is not empty, what to do?"
- 	read -p "[P]ull [O]verwrite [N]othing" choice
+ 	read -p "[P]ull [O]verwrite [N]othing [E]xit" choice
   	if [[ $choice == [pP] ]]; then
    		cd ~/.dotfiles
      		git pull
@@ -10,9 +10,16 @@ if [ -d ~/.dotfiles ]; then
 
  	if [[ $choice == [oO] ]]; then
   		rm -rf ~/.dotfiles
+    		
     	fi
-       
-	exit
+
+     	if [[ $choice == [eE] ]]; then
+      		exit
+	fi
+fi
+
+if [ ! -d ~/.dotfiles ]; then
+	git clone https://github.com/pcs03/dotfiles.git ~/.dotfiles
 fi
 	
 echo "Synchronizing pacman..."
