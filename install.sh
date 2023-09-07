@@ -46,6 +46,8 @@ for dotfile in .*; do
 		echo "Creating symlink for $dotfile"
 		rm -f ~/"$dotfile"
 		ln -s ~/.dotfiles/"$dotfile" ~/"$dotfile"
+  	fi
+done
 
 
 echo "Enabling & Starting docker"
