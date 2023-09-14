@@ -133,10 +133,27 @@ compress_all ()
 # Show git branch
 
 parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
 PS1="\[\e[34m\]\u@\h\[\e[00m\] \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
+
+if [ -f /etc/os-release ]; then
+    # freedesktop.org and systemd
+    . /etc/os-release
+    OS=$NAME
+fi
+
+
+if [ $OS == 'Ubuntu' ]; then
+    PS1="\[\e[38;5;208m\]\u@\h\[\e[00m\] \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
+fi
+
+sys=$(uname -m)
+
+if [[ $sys == 'aarch64' ]]; then
+    PS1="\[\e[95m\]\u@\h\[\e[00m\] \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
+fi
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
