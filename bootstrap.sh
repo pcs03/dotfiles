@@ -28,11 +28,14 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
-read -p "Do you want to install desktop packages (e.g. firefox)? (Y/n) " choice
-if [[ $choice == [Yy] ]]; then 
-    DESKTOP=true
-else
-    DESKTOP=false
+
+DESKTOP=false
+
+if [[ $OS != 'Rasbian GNU/Linux']]; then
+    read -p "Do you want to install desktop packages (e.g. firefox)? (Y/n) " choice
+    if [[ $choice == [Yy] ]]; then 
+        DESKTOP=true
+    fi
 fi
 
 read -p "The detected Operating system is $OS, is this correct? (Y/n) " choice
@@ -47,6 +50,9 @@ case "$OS" in
         ;;
     'Ubuntu')
         script_path="$HOME/.dotfiles/ubuntu.sh"
+        ;;
+    'Raspbian GNU/Linux')
+        script_path="$HOME/.dotfiles/rasbian.sh"
         ;;
     *)
         echo "OS not supported, exiting script..."
