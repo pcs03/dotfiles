@@ -29,10 +29,10 @@ if [ -f /etc/os-release ]; then
 fi
 
 read -p "Do you want to install desktop packages (e.g. firefox)? (Y/n) " choice
-if [[ $choice == [Nn] ]]; then 
-    DESKTOP=false
-else
+if [[ $choice == [Yy] ]]; then 
     DESKTOP=true
+else
+    DESKTOP=false
 fi
 
 read -p "The detected Operating system is $OS, is this correct? (Y/n) " choice
