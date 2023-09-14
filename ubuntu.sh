@@ -16,7 +16,7 @@ sudo apt install build-essential git bash-completion ethtool exa neofetch neovim
 if [ $DESKTOP == true ]; then
     echo "Installing additional desktop packages..."
     sudo apt install firefox steam qbittorrent
-if
+fi
 
 echo "Creating symlinks to custom dotfiles..."
 cd ~/.dotfiles
