@@ -145,7 +145,7 @@ if [ -f /etc/os-release ]; then
 fi
 
 
-if [ $OS == 'Ubuntu' ]; then
+if [[ $OS == 'Ubuntu' ]]; then
     PS1="\[\e[38;5;208m\]\u@\h\[\e[00m\] \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
 fi
 
