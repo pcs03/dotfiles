@@ -31,7 +31,7 @@ fi
 
 DESKTOP=false
 
-if [[ $OS != 'Rasbian GNU/Linux' ]]; then
+if [[ ! $OS == 'Rasbian GNU/Linux' ]]; then
     read -p "Do you want to install desktop packages (e.g. firefox)? (Y/n) " choice
     if [[ $choice == [Yy] ]]; then 
         DESKTOP=true
