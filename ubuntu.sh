@@ -11,7 +11,7 @@ sudo apt update
 sudo apt upgrade
 
 echo 'Installing base packages...'
-sudo apt install build-essential git bash-completion ethtool exa exfat-utils neofetch neovim nodejs npm ntfs-3g rsync vim
+sudo apt install build-essential git bash-completion ethtool exa neofetch neovim nodejs npm ntfs-3g rsync vim
 
 if [ $DESKTOP == true ]; then
     echo "Installing additional desktop packages..."

@@ -10,7 +10,7 @@ echo "Synchronizing pacman..."
 sudo pacman -Syu
 
 echo "Installing base packages..."
-sudo pacman -S --needed base-devel git bash-completion ethtool eza neofetch neovim nodejs npm ntfs-3g rsync vim docker yt-dlp
+sudo pacman -S --needed base-devel git bash-completion ethtool eza exfat-utils neofetch neovim nodejs npm ntfs-3g rsync vim docker yt-dlp
 
 if [ $DESKTOP == true ]; then
     echo "Installing additional desktop packages..."
