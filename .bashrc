@@ -151,7 +151,7 @@ fi
 
 sys=$(uname -m)
 
-if [[ $sys == 'aarch64' ]] || [[ $sys == 'armv7l']]; then
+if [[ $sys == 'aarch64' || $sys == 'armv7l' ]]; then
     PS1="\[\e[95m\]\u@\h\[\e[00m\] \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
 fi
 
