@@ -52,7 +52,7 @@ case "$OS" in
         script_path="$HOME/.dotfiles/ubuntu.sh"
         ;;
     'Raspbian GNU/Linux')
-        script_path="$HOME/.dotfiles/rasbian.sh"
+        script_path="$HOME/.dotfiles/raspbian.sh"
         ;;
     *)
         echo "OS not supported, exiting script..."
