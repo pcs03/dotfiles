@@ -39,4 +39,3 @@ else
         echo "Installing docker..."
     fi
 fi
-
