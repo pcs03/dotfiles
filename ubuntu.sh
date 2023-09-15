@@ -31,12 +31,15 @@ done
 
 if [ -f "$HOME/.config/nvim/init.lua" ]; then
     rm "$HOME/.config/nvim/init.lua"
-    mv ./nvim/init.lua "$HOME/.config/nvim/"
+    echo 'Creating symlink for nvim init.lua'
+    ln -s ./nvim/init.lua "$HOME/.config/nvim/init.lua"
 elif [ -d "$HOME/.config/nvim" ]; then
-    mv ./nvim/init.lua "$HOME/.config/nvim/"
+    echo 'Creating symlink for nvim init.lua'
+    ln -s ./nvim/init.lua "$HOME/.config/nvim/init.lua"
 else
     mkdir "$HOME/.config/nvim"
-    mv ./nvim/init.lua "$HOME/.config/nvim/"
+    echo 'Creating symlink for nvim init.lua'
+    ln -s ./nvim/init.lua "$HOME/.config/nvim/init.lua"
 fi
 
 if command -v docker &>/dev/null; then
