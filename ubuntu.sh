@@ -27,6 +27,16 @@ for dotfile in .*; do
 		rm -f ~/"$dotfile"
 		ln -s ~/.dotfiles/"$dotfile" ~/"$dotfile"
   	fi
+
+    if [ -f "$HOME/.config/nvim/init.lua" ]; then
+        rm "$HOME/.config/nvim/init.lua"
+        mv ./nvim/init.lua "$HOME/.config/nvim/"
+    elif [ -d "$HOME/.config/nvim" ]; then
+        mv ./nvim/init.lua "$HOME/.config/nvim/"
+    else
+        mkdir "$HOME/.config/nvim"
+        mv ./nvim/init.lua "$HOME/.config/nvim/"
+    fi
 done
 
 if command -v docker &>/dev/null; then
