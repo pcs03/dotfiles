@@ -60,14 +60,14 @@ done
 if [ -f "$HOME/.config/nvim/init.lua" ]; then
     rm "$HOME/.config/nvim/init.lua"
     echo 'Creating symlink for nvim init.lua'
-    ln -s ./nvim/init.lua "$HOME/.config/nvim/init.lua"
+    ln -s "$HOME/.dotfiles/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 elif [ -d "$HOME/.config/nvim" ]; then
     echo 'Creating symlink for nvim init.lua'
-    ln -s ./nvim/init.lua "$HOME/.config/nvim/init.lua"
+    ln -s "$HOME/.dotfiles/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 else
     mkdir "$HOME/.config/nvim"
     echo 'Creating symlink for nvim init.lua'
-    ln -s ./nvim/init.lua "$HOME/.config/nvim/init.lua"
+    ln -s "$HOME/.dotfiles/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 fi
 
 
