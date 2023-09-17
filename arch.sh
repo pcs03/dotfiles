@@ -57,17 +57,17 @@ for dotfile in .*; do
   	fi
 done
 
-if [ -f "$HOME/.config/nvim/init.lua" ]; then
-    rm "$HOME/.config/nvim/init.lua"
-    echo 'Creating symlink for nvim init.lua'
-    ln -s "$HOME/.dotfiles/nvim/init.lua" "$HOME/.config/nvim/init.lua"
-elif [ -d "$HOME/.config/nvim" ]; then
-    echo 'Creating symlink for nvim init.lua'
-    ln -s "$HOME/.dotfiles/nvim/init.lua" "$HOME/.config/nvim/init.lua"
-else
-    mkdir "$HOME/.config/nvim"
-    echo 'Creating symlink for nvim init.lua'
-    ln -s "$HOME/.dotfiles/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+if [ -d "$HOME/.config/nvim" ]; then
+	read -p "The nvim directory already exists, overwrite it? (Y/n): " choice
+	if [[ $choice == [Nn] ]]; then
+		echo "Skipping symlink for nvim directory"
+	else
+		echo "Removing old nvim directory..."
+		rm -r "$HOME/.config/nvim"
+		
+		echo "Creating symlink for nvim directory..."
+		ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
+	fi
 fi
 
 
