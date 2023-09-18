@@ -44,6 +44,8 @@ if [[ $choice == [Nn] ]]; then
     exit
 fi
 
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
 case "$OS" in
     'Arch Linux')
         script_path="$HOME/.dotfiles/arch.sh"
