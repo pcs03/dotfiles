@@ -70,10 +70,10 @@ alias '...'='cd ../..'
 alias '....'='cd ../../..'
 
 alias 'ls'='exa --color=always --group-directories-first'
-alias 'l.'='exa -a  | grep -e "^\."'
+alias 'l.'='exa -a  | grep -E "^\."'
 
 alias 'grep'='grep --color=auto'
-alias 'egrep'='egrep --color=auto'
+alias 'egrep'='grep -E --color=auto'
 alias 'fgrep'='fgrep --color=auto'
 
 alias 'code'='code --profile UserProfile'
