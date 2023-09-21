@@ -38,6 +38,8 @@ else
 	fi
 fi
 
+cd ~/.dotfiles
+
 echo "Installing AUR packages..."
 yay -S --needed --noconfirm --nocleanmenu --nodiffmenu git-completion
 
@@ -45,31 +47,6 @@ if [ $DESKTOP == true ]; then
     echo "Installing additional desktop AUR packages..."
     yay -S --needed --noconfirm --nocleanmenu --nodiffmenu jdk17-temurin postman-bin proton-ge-custom-bin visual-studio-code-bin
 fi
-
-echo "Creating symlinks to custom dotfiles..."
-cd ~/.dotfiles/dot
-
-for dotfile in .*; do
-	if [ -f "$dotfile" ]; then
-		echo "Creating symlink for $dotfile"
-		rm -f ~/"$dotfile"
-		ln -s ~/.dotfiles/dot/"$dotfile" ~/"$dotfile"
-  	fi
-done
-
-if [ -d "$HOME/.config/nvim" ]; then
-	read -p "The nvim directory already exists, overwrite it? (Y/n): " choice
-	if [[ $choice == [Nn] ]]; then
-		echo "Skipping symlink for nvim directory"
-	else
-		echo "Removing old nvim directory..."
-		rm -r "$HOME/.config/nvim"
-		
-		echo "Creating symlink for nvim directory..."
-		ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
-	fi
-fi
-
 
 echo "Enabling & Starting docker"
 sudo systemctl enable docker

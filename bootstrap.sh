@@ -46,6 +46,32 @@ fi
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
+cd ~/.dotfiles
+
+for dotfile in .*; do
+	if [ -f "$dotfile" ] && [ "$dotfile" != ".git" ]; then
+		echo "Creating symlink for $dotfile"
+		rm -f ~/"$dotfile"
+		ln -s ~/.dotfiles/"$dotfile" ~/"$dotfile"
+  	fi
+done
+
+if [ -d "$HOME/.config/nvim" ]; then
+	read -p "The nvim directory already exists, overwrite it? (Y/n): " choice
+	if [[ $choice == [Nn] ]]; then
+		echo "Skipping symlink for nvim directory"
+	else
+		echo "Removing old nvim directory..."
+		rm -r "$HOME/.config/nvim"
+		
+		echo "Creating symlink for nvim directory..."
+		ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
+	fi
+else
+    echo "Creating symlink for nvim directory..."
+    ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
+fi
+
 case "$OS" in
     'Arch Linux')
         script_path="$HOME/.dotfiles/arch.sh"
