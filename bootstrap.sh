@@ -50,8 +50,6 @@ dotfiles=$(find "$HOME/.dotfiles/dot" -maxdepth 1 -type f -name '.*')
 
 for dotfile in $dotfiles; do
     dotbase=$(basename "$dotfile")
-    echo "$dotfile"
-    echo "$dotbase"
     if [ -f "$HOME/$dotbase" ]; then
         echo "Removing old file for $dotbase"
         rm -f "$HOME/$dotbase"
