@@ -44,17 +44,26 @@ if [[ $choice == [Nn] ]]; then
     exit
 fi
 
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+cd ~/.dotfiles/dot
 
-cd ~/.dotfiles
+dotfiles=$(find "$HOME/.dotfiles/dot" -maxdepth 1 -type f -name '.*')
 
-for dotfile in .*; do
-	if [ -f "$dotfile" ] && [ "$dotfile" != ".git" ]; then
-		echo "Creating symlink for $dotfile"
-		rm -f ~/"$dotfile"
-		ln -s ~/.dotfiles/"$dotfile" ~/"$dotfile"
-  	fi
+for dotfile in $dotfiles; do
+    dotbase=$(basename "$dotfile")
+    echo "$dotfile"
+    echo "$dotbase"
+    if [ -f "$HOME/$dotbase" ]; then
+        echo "Removing old file for $dotbase"
+        rm -f "$HOME/$dotbase"
+        echo "Creating symlink for $dotbase"
+        ln -s "$dotfile" "$HOME/$dotbase"
+    else
+        echo "Creating symlink for $dotbase"
+        ln -s "$dotfile" "$HOME/$dotbase"
+    fi
 done
+
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 if [ -d "$HOME/.config/nvim" ]; then
 	read -p "The nvim directory already exists, overwrite it? (Y/n): " choice
