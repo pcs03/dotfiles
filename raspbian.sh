@@ -14,13 +14,13 @@ echo 'Installing base packages...'
 sudo apt install build-essential git bash-completion ethtool exa neofetch neovim nodejs npm ntfs-3g rsync vim
 
 echo "Creating symlinks to custom dotfiles..."
-cd ~/.dotfiles
+cd ~/.dotfiles/dot
 
 for dotfile in .*; do
-	if [ -f "$dotfile" ] && [ "$dotfile" != ".git" ]; then
+	if [ -f "$dotfile" ]; then
 		echo "Creating symlink for $dotfile"
 		rm -f ~/"$dotfile"
-		ln -s ~/.dotfiles/"$dotfile" ~/"$dotfile"
+		ln -s ~/.dotfiles/dot/"$dotfile" ~/"$dotfile"
   	fi
 done
 
