@@ -159,6 +159,6 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 
-if [[ $TERM_PROGRAM != 'vscode' ]]; then
+if [[ $TERM_PROGRAM != 'vscode' ]] && [[ $TERM == 'xterm-256color' ]]; then
     neofetch --color_blocks off
 fi
