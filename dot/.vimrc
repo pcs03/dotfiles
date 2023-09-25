@@ -5,10 +5,10 @@ let mapleader = "\<Space>"
 nnoremap <leader>pv :Ex<CR>
 
 " Map J in visual mode to move the selected lines down and reselect
-vnoremap J :m '>+1<CR>gv=gv
+"vnoremap J :m '>+1<CR>gv=gv
 
 " Map K in visual mode to move the selected lines up and reselect
-vnoremap K :m '<-2<CR>gv=gv
+"vnoremap K :m '<-2<CR>gv=gv
 
 " Map <C-d> in normal mode to scroll down and keep cursor centered
 nnoremap <C-d> <C-d>zz
