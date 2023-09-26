@@ -26,6 +26,7 @@ local plugins = {
         "mypy",
         "ruff",
         "black",
+        "yaml-language-server",
       },
     },
   }
