@@ -1,6 +1,7 @@
 -- Vim settings
 vim.opt.colorcolumn = "100"
 vim.opt.relativenumber = true
+vim.opt.clipboard = ""
 
 -- Remaps
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
