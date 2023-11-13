@@ -27,6 +27,8 @@ local plugins = {
         "ruff",
         "black",
         "yaml-language-server",
+        "clangd",
+        "clang-format"
       },
     },
   }
