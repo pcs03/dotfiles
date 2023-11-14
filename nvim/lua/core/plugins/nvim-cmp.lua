@@ -31,12 +31,11 @@ return {
                 ["<Tab>"] = cmp.mapping.confirm({ select = true })
             }),
             sources = cmp.config.sources({
-                { name = "buffer" }, -- text withing current buffer
+                { name = "nvim_lsp" },
                 { name = "path" }, -- file paths
                 { name = "luasnip" }, -- snippets
+                { name = "buffer" }, -- text withing current buffer
             }),
-
-            
         })
     end,
 }
