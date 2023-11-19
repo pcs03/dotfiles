@@ -1,5 +1,4 @@
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.keymap.set
@@ -45,7 +44,10 @@ keymap({"v", "x"}, "J", ":m '>+1<CR>gv=gv", opts)
 keymap({"v", "x"}, "p", "\"_dP", opts)
 
 -- Copy to the system clipboard
+opts.desc = "Yank selection to system clipboard"
 keymap({"n", "v"}, "<leader>y", [["+y"]], opts)
+
+opts.desc = "Yank line to system clipboard"
 keymap("n", "<leader>Y", [["+Y"]], opts)
 
 -- No Q please, and remap ctrl + C for esc
@@ -56,4 +58,5 @@ keymap("i", "<C-c>", "<Esc>", opts)
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
 
+opts.desc = "Select and replace word"
 keymap("n", "<leader>j", "*``cgn", opts)
