@@ -56,3 +56,4 @@ keymap("i", "<C-c>", "<Esc>", opts)
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
 
+keymap("n", "<leader>j", "*``cgn", opts)
