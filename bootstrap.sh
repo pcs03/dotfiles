@@ -2,19 +2,18 @@
 
 if [ -d ~/.dotfiles ]; then
 	echo "dotfiles directory is not empty, what to do?"
- 	read -p $'[P]ull [O]verwrite [N]othing [E]xit\n$ ' choice
-  	if [[ $choice == [pP] ]]; then
-   		cd ~/.dotfiles
-     		git pull
-       	fi
+    read -p $'[P]ull [O]verwrite [N]othing [E]xit\n$ ' choice
+    if [[ $choice == [pP] ]]; then
+        cd ~/.dotfiles
+        git pull
+    fi
 
- 	if [[ $choice == [oO] ]]; then
-  		rm -rf ~/.dotfiles
-    		
-    	fi
+    if [[ $choice == [oO] ]]; then
+    	rm -rf ~/.dotfiles
+    fi
 
-     	if [[ $choice == [eE] ]]; then
-      		exit
+    if [[ $choice == [eE] ]]; then
+        exit
 	fi
 fi
 
@@ -61,8 +60,6 @@ for dotfile in $dotfiles; do
     fi
 done
 
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
 if [ -d "$HOME/.config/nvim" ]; then
 	read -p "The nvim directory already exists, overwrite it? (Y/n): " choice
 	if [[ $choice == [Nn] ]]; then
@@ -77,6 +74,22 @@ if [ -d "$HOME/.config/nvim" ]; then
 else
     echo "Creating symlink for nvim directory..."
     ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
+fi
+
+if [ -d "$HOME/.config/tmux" ]; then
+	read -p "The tmux directory already exists, overwrite it? (Y/n): " choice
+	if [[ $choice == [Nn] ]]; then
+		echo "Skipping symlink for tmux directory"
+	else
+		echo "Removing old tmux directory..."
+		rm -r "$HOME/.config/tmux"
+		
+		echo "Creating symlink for tmux directory..."
+		ln -s "$HOME/.dotfiles/tmux" "$HOME/.config/tmux"
+	fi
+else
+    echo "Creating symlink for tmux directory..."
+    ln -s "$HOME/.dotfiles/tmux" "$HOME/.config/tmux"
 fi
 
 case "$OS" in
