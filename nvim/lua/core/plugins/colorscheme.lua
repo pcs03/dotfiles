@@ -1,9 +1,11 @@
 return {
+    "folke/tokyonight.nvim",
+    "catppuccin/nvim",
     {
-        "bluz71/vim-nightfly-guicolors",
+        "rose-pine/neovim",
         priority = 1000,
         config = function()
-            vim.cmd([[colorscheme nightfly]])
+            vim.cmd([[colorscheme rose-pine]])
         end,
     },
 }
