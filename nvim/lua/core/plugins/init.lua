@@ -6,6 +6,12 @@ return {
     -- Navigation with tmux panes
     "christoomey/vim-tmux-navigator",
 
+    -- Vim-be-good game
+    "ThePrimeagen/vim-be-good",
+
+    -- Smooth scrolling with c-d and c-u
+    { "karb94/neoscroll.nvim", opts = {} },
+
     -- Show keybinds
     { "folke/which-key.nvim", opts = {} },
 
