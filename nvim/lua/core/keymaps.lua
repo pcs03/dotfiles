@@ -58,5 +58,9 @@ keymap("i", "<C-c>", "<Esc>", opts)
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
 
+-- Keep screen centered when jumping through search results
+keymap("n", "n", "nzzzv")
+keymap("n", "N", "Nzzzv")
+
 opts.desc = "Select and replace word"
 keymap("n", "<leader>j", "*``cgn", opts)
