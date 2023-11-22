@@ -39,5 +39,16 @@ return {
         yadm = {
             enable = false
         },
+        on_attach = function(bufnr)
+            local gs = require("gitsigns")
+
+            local function keymap(mode, l, r, opts)
+                opts = opts or {}
+                opts.buffer = bufnr
+                vim.keymap.set(mode, l, r, opts)
+            end
+
+            keymap("n", "<leader>hp", gs.preview_hunk)
+        end,
     },
 }

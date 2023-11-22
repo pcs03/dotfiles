@@ -13,7 +13,7 @@ return {
         'saadparwaiz1/cmp_luasnip',
         'rafamadrizz/friendly-snippets',
         'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim'
+        'williamboman/mason-lspconfig.nvim',
     },
     config = function()
         local lsp = require("lsp-zero")
@@ -94,5 +94,4 @@ return {
             },
         })
     end
-
 }
