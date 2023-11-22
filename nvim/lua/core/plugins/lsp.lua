@@ -41,15 +41,13 @@ return {
             })
         })
 
-        lsp.set_preferences({
-            suggest_lsp_servers = true,
-            sign_icons = {
+        lsp.set_sign_icons({
                 error = " ",
                 warn = " ",
                 hint = "󰠠 ",
                 info = " ",
-            },
         })
+        
 
         lsp.on_attach(function(client, bufnr)
             local opts = { buffer = bufnr, remap = false }
