@@ -28,6 +28,13 @@ if [ -f /etc/os-release ]; then
 fi
 
 
+# Remap caps-lock to control, remap double shift to caps-lock
+DE = $DESKTOP_SESSION
+if [[ $DE == "gnome" ]]; then
+    gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier', 'shift:both_shiftlock']"
+fi
+
+
 DESKTOP=false
 
 if [[ ! $OS == 'Rasbian GNU/Linux' ]]; then
