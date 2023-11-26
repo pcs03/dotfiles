@@ -20,5 +20,8 @@ return {
 
     -- Comments 
     { "numToStr/Comment.nvim", opts = {}, lazy = false },
+
+    -- Context
+    { "nvim-treesitter/nvim-treesitter-context", opts = {} },
 }
 
