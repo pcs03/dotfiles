@@ -18,9 +18,6 @@ return {
     -- Indent guides blanklines
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
-    -- Comments 
-    { "numToStr/Comment.nvim", opts = {}, lazy = false },
-
     -- Context
     { "nvim-treesitter/nvim-treesitter-context", opts = {} },
 }
