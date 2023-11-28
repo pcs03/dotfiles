@@ -62,6 +62,9 @@ return {
 
 			opts.desc = "Format document"
 			keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts)
+
+            opts.desc = "Show code actions"
+            keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		end)
 
 		require("mason").setup({})
