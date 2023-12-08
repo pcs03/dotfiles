@@ -65,6 +65,9 @@ return {
 
             opts.desc = "Show code actions"
             keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+
+            opts.desc = "Show diagnostics"
+            keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 		end)
 
 		require("mason").setup({})
