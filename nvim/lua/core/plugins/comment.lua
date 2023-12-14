@@ -5,16 +5,6 @@ return {
 		padding = true,
 		-- Lines to be ignored while (un)comment
 		ignore = nil,
-		-- Toggle comment
-		toggler = {
-			line = "<leader>cc",
-			block = "<leader>bcc",
-		},
-        -- Operator-pending mappings for visual and normal mode
-        opleader = {
-            line = '<leader>c',
-            block = '<leader>bc'
-        },
         -- Enable / Disable keybinds
         mappings = {
             basic = true,
