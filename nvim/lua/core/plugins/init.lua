@@ -3,6 +3,12 @@ return {
     "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
 
+    -- Surrounding a selection with brackets/quotes
+    "tpope/vim-surround",
+
+    -- Repeating of plugin commands with .
+    "tpope/vim-repeat",
+
     -- Navigation with tmux panes
     "christoomey/vim-tmux-navigator",
 
