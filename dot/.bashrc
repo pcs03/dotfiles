@@ -80,7 +80,8 @@ alias 'code'='code --profile UserProfile'
 alias 'vim'='nvim'
 
 dusort() {
-	du -h "$1" --max-depth=1 | sort -h
+    dir="${1:-./}"
+	du -h "$dir" --max-depth=1 | sort -h
 }
 
 ex ()

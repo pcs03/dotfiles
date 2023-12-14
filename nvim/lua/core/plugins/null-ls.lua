@@ -15,6 +15,7 @@ return {
             formatting.black.with({
                 extra_args = { "--preview", "--line-length", "120"}
             }),
+            formatting.isort,
             diagnostics.ruff,
 
             -- JS / TS
