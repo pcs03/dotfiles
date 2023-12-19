@@ -79,7 +79,7 @@ return {
 				"tailwindcss",
 				"lua_ls",
 				"emmet_ls",
-                "pylsp",
+                "pyright",
 				"arduino_language_server",
 				"clangd",
 				"bashls",
