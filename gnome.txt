@@ -1,0 +1,10 @@
+[QSTweak] Quick Settings Tweaker
+Appindicator and KstatusNotifier Support
+Blur My Shell
+Caffeine
+Extension List
+Grand Theft Focus
+GSConnect
+Pano - Clipboard Manager
+Notification Timeout
+Vitals
