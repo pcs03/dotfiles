@@ -10,11 +10,11 @@ echo "Synchronizing pacman..."
 sudo pacman -Syu
 
 echo "Installing base packages..."
-sudo pacman -S --needed base-devel git bash-completion ethtool eza exfat-utils neofetch neovim nodejs npm ntfs-3g rsync vim docker yt-dlp
+sudo pacman -S --needed base-devel git bash-completion ethtool eza exfat-utils neofetch neovim nodejs npm ntfs-3g rsync vim docker yt-dlp ripgrep tmux
 
 if [ $DESKTOP == true ]; then
     echo "Installing additional desktop packages..."
-    sudo pacman -S --needed bluez bluez-utils firefox noto-fonts noto-fonts-cjk noto-fonts-extra steam sushi thunderbird virtualbox virtualbox-host-modules-arch obsidian qbittorrent
+    sudo pacman -S --needed bluez bluez-utils firefox ttf-jetbrains-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-extra steam sushi thunderbird virtualbox virtualbox-host-modules-arch obsidian qbittorrent qmk wl-clipboard hardinfo
 fi
 
 echo "Installing yay AUR helper..."
@@ -45,7 +45,7 @@ yay -S --needed --noconfirm --nocleanmenu --nodiffmenu git-completion
 
 if [ $DESKTOP == true ]; then
     echo "Installing additional desktop AUR packages..."
-    yay -S --needed --noconfirm --nocleanmenu --nodiffmenu jdk17-temurin postman-bin proton-ge-custom-bin visual-studio-code-bin
+    yay -S --needed --noconfirm --nocleanmenu --nodiffmenu jdk17-temurin postman-bin visual-studio-code-bin ether-bin
 fi
 
 echo "Enabling & Starting docker"
