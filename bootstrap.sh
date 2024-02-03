@@ -29,7 +29,7 @@ fi
 
 
 # Remap caps-lock to control, remap double shift to caps-lock
-DE = $DESKTOP_SESSION
+DE=$DESKTOP_SESSION
 if [[ $DE == "gnome" ]]; then
     read -p 'Do you want to remap CAPS to CTRL? (y/N)' choice
     if [[ $choice == [yY] ]]; then
