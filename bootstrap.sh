@@ -1,15 +1,15 @@
 #!/bin/bash
 
-if [ -d ~/.dotfiles ]; then
+if [ -d "$HOME/.dotfiles" ]; then
 	echo "dotfiles directory is not empty, what to do?"
     read -p $'[P]ull [O]verwrite [N]othing [E]xit\n$ ' choice
     if [[ $choice == [pP] ]]; then
-        cd ~/.dotfiles
+        cd "$HOME/.dotfiles"
         git pull
     fi
 
     if [[ $choice == [oO] ]]; then
-    	rm -rf ~/.dotfiles
+    	rm -rf "$HOME/.dotfiles"
     fi
 
     if [[ $choice == [eE] ]]; then
@@ -17,8 +17,8 @@ if [ -d ~/.dotfiles ]; then
 	fi
 fi
 
-if [ ! -d ~/.dotfiles ]; then
-	git clone https://github.com/pcs03/dotfiles.git ~/.dotfiles
+if [ ! -d "$HOME/.dotfiles" ]; then
+	git clone "https://github.com/pcs03/dotfiles.git" "$HOME/.dotfiles"
 fi
 
 if [ -f /etc/os-release ]; then
@@ -27,99 +27,66 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
-
-# Remap caps-lock to control, remap double shift to caps-lock
-DE=$DESKTOP_SESSION
-if [[ $DE == "gnome" ]]; then
-    read -p 'Do you want to remap CAPS to CTRL? (y/N)' choice
-    if [[ $choice == [yY] ]]; then
-        gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier', 'shift:both_shiftlock']"
-    fi
-fi
-
-
-DESKTOP=false
-
-if [[ ! $OS == 'Rasbian GNU/Linux' ]]; then
-    read -p "Do you want to install desktop packages (e.g. firefox)? (y/N) " choice
-    if [[ $choice == [Yy] ]]; then 
-        DESKTOP=true
-    fi
-fi
-
-read -p "The detected Operating system is $OS, is this correct? (Y/n) " choice
-if [[ $choice == [Nn] ]]; then
-    echo "Exiting script..."
-    exit
-fi
-
-cd ~/.dotfiles/dot
-
-dotfiles=$(find "$HOME/.dotfiles/dot" -maxdepth 1 -type f -name '.*')
+dotfiles=$(find "$HOME/.dotfiles/dot" -maxdepth 1 -mindepth 1 -type f -name '.*')
 
 for dotfile in $dotfiles; do
     dotbase=$(basename "$dotfile")
-    if [ -f "$HOME/$dotbase" ]; then
-        echo "Removing old file for $dotbase"
-        rm -f "$HOME/$dotbase"
-        echo "Creating symlink for $dotbase"
-        ln -s "$dotfile" "$HOME/$dotbase"
+    if [[ -f "$HOME/$dotbase" ]]; then
+        echo -n "$dotbase already exists. "
     else
-        echo "Creating symlink for $dotbase"
-        ln -s "$dotfile" "$HOME/$dotbase"
+        echo -n "$dotbase does not exist. "
+    fi
+
+    read -p "Symlink $dotbase? (Y/n): " choice
+    if [[ -z "$choice" ]] || [[ "$choice" == [yY] ]]; then
+        if [[ -f "$HOME/$dotbase" ]]; then
+            rm "$HOME/$dotbase"
+            echo "  Removed existing $dotbase."
+        fi
+
+        ls -s "$HOME/.dotfiles/dot/$dotbase" "$HOME/$dotbase"
+        echo "Created symlink for $dotbase"
     fi
 done
 
-if [ -d "$HOME/.config/nvim" ]; then
-	read -p "The nvim directory already exists, overwrite it? (Y/n): " choice
-	if [[ $choice == [Nn] ]]; then
-		echo "Skipping symlink for nvim directory"
-	else
-		echo "Removing old nvim directory..."
-		rm -r "$HOME/.config/nvim"
-		
-		echo "Creating symlink for nvim directory..."
-		ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
-	fi
-else
-    echo "Creating symlink for nvim directory..."
-    ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
-fi
+configs=$(find "$HOME/.dotfiles/config/" -maxdepth 1 -mindepth 1 -type d)
 
-if [ -d "$HOME/.config/tmux" ]; then
-	read -p "The tmux directory already exists, overwrite it? (Y/n): " choice
-	if [[ $choice == [Nn] ]]; then
-		echo "Skipping symlink for tmux directory"
-	else
-		echo "Removing old tmux directory..."
-		rm -r "$HOME/.config/tmux"
-		
-		echo "Creating symlink for tmux directory..."
-		ln -s "$HOME/.dotfiles/tmux" "$HOME/.config/tmux"
-	fi
-else
-    echo "Creating symlink for tmux directory..."
-    ln -s "$HOME/.dotfiles/tmux" "$HOME/.config/tmux"
-fi
+for dir in $configs; do
+    dirname=$(basename "$dir")
+    if [[ -d "$HOME/.config/$dirname" ]]; then
+        echo -n "$dirname directory already exists. "
+    else
+        echo -n "$dirname directory does not exist. "
+    fi
+
+    read -p "Symlink $dirname? (Y/n): " choice
+    if [[ -z "$choice" ]] || [[ "$choice" == [Yy] ]]; then
+        if [[ -d "$HOME/.config/$dirname" ]]; then
+            rm -rf "$HOME/.config/$dirname"
+            echo "  Removed existing $dirname directory."
+        fi
+
+        ln -sf "$HOME/.dotfiles/config/$dirname" "$HOME/.config/$dirname"
+        echo "  Created symlink for $dirname directory."
+        echo ""
+    fi
+done
 
 case "$OS" in
     'Arch Linux')
         script_path="$HOME/.dotfiles/arch.sh"
+        echo "Arch"
         ;;
     'Ubuntu')
         script_path="$HOME/.dotfiles/ubuntu.sh"
+        echo "Ubuntu"
         ;;
     'Raspbian GNU/Linux')
         script_path="$HOME/.dotfiles/raspbian.sh"
+        echo "Raspbian"
         ;;
     *)
         echo "OS not supported, exiting script..."
         exit
         ;;
 esac
-
-if [ $DESKTOP = true ]; then
-    script_path="$script_path -d"
-fi
-
-bash $script_path

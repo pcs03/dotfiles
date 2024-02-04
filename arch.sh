@@ -12,6 +12,16 @@ sudo pacman -Syu
 echo "Installing base packages..."
 sudo pacman -S --needed base-devel git bash-completion ethtool eza exfat-utils neofetch neovim nodejs npm ntfs-3g rsync vim docker yt-dlp ripgrep tmux
 
+# Installation of additional packages
+read -p 
+
+
+
+
+
+
+
+
 if [ $DESKTOP == true ]; then
     echo "Installing additional desktop packages..."
     sudo pacman -S --needed bluez bluez-utils firefox ttf-jetbrains-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-extra steam sushi thunderbird virtualbox virtualbox-host-modules-arch obsidian qbittorrent qmk wl-clipboard hardinfo

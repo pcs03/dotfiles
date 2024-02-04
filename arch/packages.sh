@@ -1,0 +1,101 @@
+base=(
+    base-devel 
+    git 
+    bash-completion 
+    ethtool 
+    eza 
+    exfat-utils 
+    neofetch 
+    nodejs 
+    neovim 
+    vim 
+    npm 
+    ntfs-3g 
+    rsync 
+    docker 
+    yt-dlp 
+    ripgrep 
+    tmux 
+)
+
+desktop=(
+    jdk17-temurin 
+    postman-bin 
+    visual-studio-code-bin 
+    etcher-bin 
+    gdm 
+    bluez
+    bluez-utils 
+    firefox 
+    ttf-jetbrains-mono-nerd 
+    noto-fonts 
+    noto-fonts-cjk 
+    noto-fonts-extra 
+    noto-fonts-emoji 
+    thunderbird 
+    virtualbox 
+    virtualbox-host-modules-arch 
+    obsidian 
+    qbittorrent 
+    qmk 
+    wl-clipboard 
+    hardinfo 
+    zathura 
+    zathura-pdf-mupdf
+    texlive
+    qt5-wayland 
+    qt5ct 
+    qt5-svg 
+    qt6ct
+    qt6-wayland 
+    qt5-quickcontrols 
+    qt5-graphicaleffects
+    gtk3 
+    polkit-gnome 
+    pipewire 
+    wireplumber 
+    jq 
+    cliphist 
+    python-requests 
+    pacman-contrib 
+    ffmpeg
+    btop
+    mpv
+)
+
+gnome=(
+    gnome
+)
+
+hypr=(
+    hyprland
+    kitty 
+    mako 
+    waybar 
+    swww 
+    swaylock-effects 
+    wofi 
+    wlogout 
+    xdg-desktop-portal-hyprland 
+    swappy 
+    grim 
+    slurp 
+    thunar 
+    pamixer 
+    pavucontrol 
+    brightnessctl 
+    blueman 
+    network-manager-applet 
+    gvfs 
+    thunar-archive-plugin 
+    file-roller
+    starship 
+    papirus-icon-theme 
+    lxappearance 
+    xfce4-settings
+    nwg-look-bin
+    )
+
+
+
+
