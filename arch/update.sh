@@ -48,8 +48,8 @@ for pack in ${base[@]}; do
 done
 
 # Installation of additional packages
-read -p "Update desktop packages? (Y/n)" choice
-if [[ $choice == [yY] ]]; then
+read -p "Update desktop packages? (Y/n): " choice
+if [[ -z $choice ]] || [[ $choice == [yY] ]]; then
     echo "Updating desktop packages."
     for pack in ${desktop[@]}; do
     if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
