@@ -40,12 +40,18 @@ keymap("v", ">", ">gv", opts)
 keymap({"v", "x"}, "K", ":m '<-2<CR>gv=gv", opts)
 keymap({"v", "x"}, "J", ":m '>+1<CR>gv=gv", opts)
 
+keymap({"v", "x"}, "<S-Up>", ":m '<-2<CR>gv=gv", opts)
+keymap({"v", "x"}, "<S-Down>", ":m '>+1<CR>gv=gv", opts)
+
 -- Paste without polluting the register
 keymap({"v", "x"}, "p", "\"_dP", opts)
 
 -- Copy to the system clipboard
-opts.desc = "Yank selection to system clipboard"
+opts.desc = "Yank to system clipboard"
 keymap({"n", "v"}, "<leader>y", [["+y"]], opts)
+
+opts.desc = "Paste from system clipboard"
+keymap({"n", "v"}, "<leader>p", [["+p"]], opts)
 
 opts.desc = "Yank line to system clipboard"
 keymap("n", "<leader>Y", [["+Y"]], opts)
