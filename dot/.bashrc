@@ -69,8 +69,8 @@ alias '..'='cd ..'
 alias '...'='cd ../..'
 alias '....'='cd ../../..'
 
-alias 'ls'='exa --color=always --group-directories-first'
-alias 'l.'='exa -a  | grep -E "^\."'
+alias 'ls'='eza --color=always --group-directories-first'
+alias 'l.'='eza -a  | grep -E "^\."'
 
 alias 'grep'='grep --color=auto'
 alias 'egrep'='grep -E --color=auto'
