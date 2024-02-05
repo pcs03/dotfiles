@@ -1,5 +1,5 @@
-source ./packages.sh
-cd ~/.dotfiles
+cd "$HOME/.dotfiles"
+source "./arch/packages.sh"
 
 # Check for yay
 if [ ! -f /sbin/yay ]; then  
@@ -42,8 +42,8 @@ esac
 
 echo "Updating base packages."
 for pack in ${base[@]}; do
-    if ! yay -Q $pack &>> /dev/null ; then
-        yay -S --needed --nodiffmenu --nodiffmenu $pack
+    if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
+        yay -S --needed --cleanmenu=false --diffmenu=false $pack
     fi
 done
 
@@ -52,14 +52,14 @@ read -p "Update desktop packages? (Y/n)" choice
 if [[ $choice == [yY] ]]; then
     echo "Updating desktop packages."
     for pack in ${desktop[@]}; do
-    if ! yay -Q $pack &>> /dev/null ; then
-        yay -S --needed --nodiffmenu --nodiffmenu $pack
+    if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
+        yay -S --needed --cleanmenu=false --diffmenu=false $pack
     fi
     done
 
     for pack in ${DE_PACKS[@]}; do
-    if ! yay -Q $pack &>> /dev/null ; then
-        yay -S --needed --nodiffmenu --nodiffmenu $pack
+    if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
+        yay -S --needed --cleanmenu=false --diffmenu=false $pack
     fi
     done
 fi

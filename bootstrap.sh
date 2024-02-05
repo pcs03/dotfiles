@@ -27,63 +27,62 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
-dotfiles=$(find "$HOME/.dotfiles/dot" -maxdepth 1 -mindepth 1 -type f -name '.*')
-
-for dotfile in $dotfiles; do
-    dotbase=$(basename "$dotfile")
-    if [[ -f "$HOME/$dotbase" ]]; then
-        echo -n "$dotbase already exists. "
+for dotfile in $(ls -A "$HOME/.dotfiles/dot"); do
+    if [[ -f "$HOME/$dotfile" ]]; then
+        echo -n "$dotfile already exists. "
     else
-        echo -n "$dotbase does not exist. "
+        echo -n "$dotfile does not exist. "
     fi
 
-    read -p "Symlink $dotbase? (Y/n): " choice
+    read -p "Symlink $dotfile? (Y/n): " choice
     if [[ -z "$choice" ]] || [[ "$choice" == [yY] ]]; then
-        if [[ -f "$HOME/$dotbase" ]]; then
-            rm "$HOME/$dotbase"
-            echo "  Removed existing $dotbase."
+        if [[ -f "$HOME/$dotfile" ]]; then
+            rm "$HOME/$dotfile"
+            echo "  Removed existing $dotfile."
         fi
 
-        ls -s "$HOME/.dotfiles/dot/$dotbase" "$HOME/$dotbase"
-        echo "Created symlink for $dotbase"
-    fi
-done
-
-configs=$(find "$HOME/.dotfiles/config/" -maxdepth 1 -mindepth 1 -type d)
-
-for dir in $configs; do
-    dirname=$(basename "$dir")
-    if [[ -d "$HOME/.config/$dirname" ]]; then
-        echo -n "$dirname directory already exists. "
-    else
-        echo -n "$dirname directory does not exist. "
-    fi
-
-    read -p "Symlink $dirname? (Y/n): " choice
-    if [[ -z "$choice" ]] || [[ "$choice" == [Yy] ]]; then
-        if [[ -d "$HOME/.config/$dirname" ]]; then
-            rm -rf "$HOME/.config/$dirname"
-            echo "  Removed existing $dirname directory."
-        fi
-
-        ln -sf "$HOME/.dotfiles/config/$dirname" "$HOME/.config/$dirname"
-        echo "  Created symlink for $dirname directory."
+        ln -s "$HOME/.dotfiles/dot/$dotfile" "$HOME/$dotfile"
+        echo "  Created symlink for $dotfile"
         echo ""
     fi
 done
 
+for config in $(ls -A "$HOME/.dotfiles/config"); do
+    if [[ -d "$HOME/.config/$config" ]]; then
+        echo -n "$config directory already exists. "
+    else
+        echo -n "$config directory does not exist. "
+    fi
+
+    read -p "Symlink $config? (Y/n): " choice
+    if [[ -z "$choice" ]] || [[ "$choice" == [Yy] ]]; then
+        if [[ -d "$HOME/.config/$config" ]]; then
+            rm -rf "$HOME/.config/$config"
+            echo "  Removed existing $config directory."
+        fi
+
+        ln -sf "$HOME/.dotfiles/config/$config" "$HOME/.config/$config"
+        echo "  Created symlink for $config directory."
+        echo ""
+    fi
+done
+
+echo "All dotfiles are synchronized."
+read -p "Do a full install? (y/N)" install
+
 case "$OS" in
     'Arch Linux')
-        script_path="$HOME/.dotfiles/arch.sh"
-        echo "Arch"
+        if [[ $install == [yY] ]]; then
+            /bin/bash "$HOME/.dotfiles/arch/install.sh"
+        else
+            /bin/bash "$HOME/.dotfiles/arch/update.sh"
+        fi
         ;;
     'Ubuntu')
-        script_path="$HOME/.dotfiles/ubuntu.sh"
-        echo "Ubuntu"
+        /bin/bash "$HOME/.dotfiles/ubuntu/update.sh"
         ;;
     'Raspbian GNU/Linux')
-        script_path="$HOME/.dotfiles/raspbian.sh"
-        echo "Raspbian"
+        /bin/bash "$HOME/.dotfiles/raspbian/update.sh"
         ;;
     *)
         echo "OS not supported, exiting script..."
