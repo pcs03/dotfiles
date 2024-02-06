@@ -75,7 +75,7 @@ hypr=(
     swww 
     swaylock-effects 
     wofi 
-    wlogout 
+    wleave-git 
     xdg-desktop-portal-hyprland 
     swappy 
     grim 

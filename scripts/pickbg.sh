@@ -15,5 +15,6 @@ fi
 directory=$(realpath $1)
 
 wallpaper=$(find "$directory" -type f | shuf -n 1)
+cat $wallpaper > "$HOME/.cache/current_wallpaper"
 
 echo $wallpaper
