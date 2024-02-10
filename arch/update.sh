@@ -23,22 +23,24 @@ echo "Updating yay."
 yay -Syu --noconfirm
 echo "yay updated."
 
+# Additional configurations
+read -p "Enter network interface for Wake on LAN (leave blank if not desired): " interface
+if [ ! -z $interface ]; then
+    mac=$(ip link show "$interface" | grep link/ether | awk '{print $2}')
+    if [ ! -z $mac ]; then
+        echo "[Match]
+MACAddress=$mac
 
-DE_NAME=$(echo $XDG_CURRENT_DESKTOP)
-case $DE_NAME in
-    "GNOME")
-        DE=1
-        DE_PACKS=$gnome
-        ;;
-    "Hyprland")
-        DE=2
-        DE_PACKS=$hypr
-        ;;
-    *)
-        echo "No supported DE/WM: $DE_NAME"
-        exit
-        ;;
-esac
+[Link]
+NamePolicy=kernel database onboard slot path
+MACAddressPolicy=persistent
+WakeOnLan=magic" | sudo tee /etc/systemd/network/50-wired.link > /dev/null
+        
+        echo "Created Wake on LAN configuration file"
+    else
+        echo "Could not find MAC address for interface, Wake on LAN will not be enabled."
+    fi
+fi
 
 echo "Updating base packages."
 for pack in ${base[@]}; do
@@ -48,20 +50,32 @@ for pack in ${base[@]}; do
 done
 
 # Installation of additional packages
-read -p "Update desktop packages? (Y/n): " choice
+read -p "Update base desktop packages? (Y/n): " choice
 if [[ -z $choice ]] || [[ $choice == [yY] ]]; then
     echo "Updating desktop packages."
     for pack in ${desktop[@]}; do
-    if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
-        yay -S --needed --cleanmenu=false --diffmenu=false $pack
-    fi
+        if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
+            yay -S --needed --cleanmenu=false --diffmenu=false $pack
+        fi
     done
 
-    for pack in ${DE_PACKS[@]}; do
-    if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
-        yay -S --needed --cleanmenu=false --diffmenu=false $pack
+    read -p "Update packages for GNOME? (y/N): " choice
+    if [[ $choice == [Yy] ]]; then
+        for pack in ${gnome[@]}; do
+            if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
+                yay -S --needed --cleanmenu=false --diffmenu=false $pack
+            fi
+        done
     fi
-    done
+
+    read -p "Update packages for Hyprland? (y/N): " choice
+    if [[ $choice == [Yy] ]]; then
+        for pack in ${hypr[@]}; do
+            if ! { yay -Q $pack > /dev/null 2>&1 || yay -Qg $pack > /dev/null 2>&1; }; then
+                yay -S --needed --cleanmenu=false --diffmenu=false $pack
+            fi
+        done
+    fi
 fi
 
 echo "Enabling & Starting docker"
