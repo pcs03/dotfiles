@@ -17,6 +17,7 @@ return {
         config = function()
             local theme = require("lualine.themes.auto")
             theme.normal.c.bg = "None"
+            theme.inactive.c.bg = "None"
             require("lualine").setup {
                 options = {
                     theme = theme
