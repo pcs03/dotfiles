@@ -16,24 +16,6 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-}
-
 button {
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
@@ -66,23 +48,13 @@ button:hover {
 #bluetooth,
 #custom-updates,
 #workspaces,
+#custom-exit,
 #mpd {
     background-color: @surface1;
     border-radius: 10px;
-    padding: 0 10px;
+    padding: 2px 12px 2px 8px;
     color: @text;
     opacity: 0.8;
-    margin: 2 1 0 1;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
 }
 
 #battery.charging, #battery.plugged {
@@ -113,6 +85,4 @@ label:focus {
 
 #custom-updates {
     border-radius: 5px;
-    /* padding: 2px 10px 0px 10px; */
-    /* margin: 5px 15px 5px 0px; */
 }
