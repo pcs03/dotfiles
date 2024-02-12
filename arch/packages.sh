@@ -28,6 +28,7 @@ desktop=(
     bluez-utils 
     firefox 
     ttf-jetbrains-mono-nerd 
+    ttf-font-awesome
     noto-fonts 
     noto-fonts-cjk 
     noto-fonts-extra 
