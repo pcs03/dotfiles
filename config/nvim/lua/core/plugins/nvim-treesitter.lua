@@ -14,6 +14,9 @@ return {
                 -- Syntax highlighting
                 highlight = {
                     enable = true,
+                    disable = {
+                        "latex",
+                    },
                 },
                 -- Indendation
                 indent = {
@@ -52,8 +55,10 @@ return {
                     "scss",
                     "sql",
                     "toml",
+                    "bibtex",
+                    "latex"
                 },
-
+                
                 -- Auto install missing parsers
                 auto_install = true,
 

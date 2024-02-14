@@ -90,6 +90,7 @@ return {
 				"jsonls",
 				"rust_analyzer",
 				"sqlls",
+                "texlab",
 			},
 			handlers = {
 				lsp.default_setup,
