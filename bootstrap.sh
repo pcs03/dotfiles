@@ -72,18 +72,14 @@ read -p "Do a full install? (y/N)" install
 
 case "$OS" in
     'Arch Linux')
-        if [[ $install == [yY] ]]; then
-            /bin/bash "$HOME/.dotfiles/arch/install.sh"
-        else
-            /bin/bash "$HOME/.dotfiles/arch/update.sh"
-        fi
+        /bin/bash "$HOME/.dotfiles/arch/update.sh"
         ;;
     'Ubuntu')
         /bin/bash "$HOME/.dotfiles/ubuntu/update.sh"
         ;;
-    'Raspbian GNU/Linux')
-        /bin/bash "$HOME/.dotfiles/raspbian/update.sh"
-        ;;
+    # 'Raspbian GNU/Linux')
+    #     /bin/bash "$HOME/.dotfiles/raspbian/update.sh"
+    #     ;;
     *)
         echo "OS not supported, exiting script..."
         exit

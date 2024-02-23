@@ -1,0 +1,37 @@
+base=(
+    build-essential
+    git
+    bash-completion
+    ethtool
+    exa
+    neofetch
+    nodejs
+    neovim
+    vim
+    npm
+    ntfs-3g
+    rsync
+    yt-dlp
+    ripgrep
+    tmux
+    jq
+)
+
+desktop=(
+    gnome
+    bluez
+    fonts-jetbrains-mono
+    fonts-font-awesome
+    fonts-noto
+    fonts-cjk
+    fonts-noto-extra
+    fonts-noto-color-emoji
+    thunderbird 
+    qbittorrent 
+    wl-clipboard 
+    hardinfo 
+    pipewire 
+    ffmpeg
+    mpv
+)
+
