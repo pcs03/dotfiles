@@ -22,6 +22,10 @@ return {
             formatting.prettierd,
             diagnostics.eslint_d,
             actions.eslint_d,
+
+            -- LaTeX
+            formatting.latexindent,
+
         })
         return opts
     end,
