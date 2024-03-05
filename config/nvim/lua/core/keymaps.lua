@@ -56,8 +56,10 @@ keymap("n", "<leader>Y", [["+Y"]], opts)
 opts.desc = "Paste from system clipboard"
 keymap({"n", "v"}, "<leader>p", [["+p"]], opts)
 
--- No Q please, and remap ctrl + C for esc
-keymap("n", "Q", "<nop>", opts)
+-- Q to split one long line into separate lines
+keymap("n", "Q", "gq", opts)
+
+-- To make sure ctrl + C will always exit out of everything
 keymap("i", "<C-c>", "<Esc>", opts)
 
 -- Page up and down with recenter
