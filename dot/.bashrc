@@ -160,3 +160,10 @@ export PATH=$BUN_INSTALL/bin:$PATH
 if [[ $TERM_PROGRAM != 'vscode' ]] && [[ $TERM == 'xterm-256color' ]]; then
     neofetch --color_blocks off
 fi
+
+# pyenv
+export XDG_CONFIG_HOME="$HOME/.config"
+export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
