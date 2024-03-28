@@ -15,6 +15,10 @@ return {
     -- Vim-be-good game
     "ThePrimeagen/vim-be-good",
 
+    -- Grammar checking
+    "rhysd/vim-grammarous",
+
+
     -- Smooth scrolling with c-d and c-u
     { "karb94/neoscroll.nvim", opts = {} },
 
@@ -26,5 +30,6 @@ return {
 
     -- Context
     { "nvim-treesitter/nvim-treesitter-context", opts = {} },
+
 }
 

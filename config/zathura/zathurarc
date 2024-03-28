@@ -32,5 +32,3 @@ set index-active-bg		        "#313244"
 set render-loading-bg		      "#1E1E2E"
 set render-loading-fg		      "#CDD6F4"
 
-set highlight-active-color	  "#ffffff"
-set hightlight-transparency 1

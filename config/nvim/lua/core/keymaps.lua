@@ -57,7 +57,7 @@ opts.desc = "Paste from system clipboard"
 keymap({"n", "v"}, "<leader>p", [["+p"]], opts)
 
 -- Q to split one long line into separate lines
-keymap("n", "Q", "gq", opts)
+keymap("n", "Q", "gw", opts)
 
 -- To make sure ctrl + C will always exit out of everything
 keymap("i", "<C-c>", "<Esc>", opts)

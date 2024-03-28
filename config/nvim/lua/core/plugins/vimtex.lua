@@ -9,5 +9,6 @@ return {
         vim.g.vimtex_compiler_latexmk = {
             out_dir = 'build',
         }
+        vim.g.vimtex_spell_enabled = 1
     end,
 }
