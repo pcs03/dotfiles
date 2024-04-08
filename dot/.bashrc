@@ -12,6 +12,10 @@ then
 fi
 export PATH
 
+if [ -d "$HOME/.dotfiles/scripts" ]; then
+    PATH="$HOME/.dotfiles/scripts:$PATH"
+fi
+
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
 	for rc in ~/.bashrc.d/*; do

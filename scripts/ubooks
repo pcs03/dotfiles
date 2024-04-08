@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+read -p "Upload all files in cwd to pstet@192.168.2.160? (Y/n) " choice
+
+if [[ -z $choice ]] || [[ $choice == [yY] ]]; then
+    scp ./* pstet@192.168.2.160:/srv/docker/bookshelf/calibre/upload/
+fi

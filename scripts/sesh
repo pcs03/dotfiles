@@ -1,0 +1,8 @@
+#!/bin/bash
+
+sessions=$(tmux list-sessions -F '#S')
+selected_session=$(echo "$sessions" | fzf --height 40% --reverse --cycle)
+
+if [ -n "$selected_session" ]; then
+    tmux attach -t "$selected_session"
+fi
