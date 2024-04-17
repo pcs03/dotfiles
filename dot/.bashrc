@@ -80,6 +80,12 @@ alias 'fgrep'='fgrep --color=auto'
 alias 'code'='code --profile UserProfile'
 alias 'vim'='nvim'
 
+# python venv
+alias 'venv'='source venv/bin/activate'
+alias 'venvc'='python -m venv venv && source venv/bin/activate'
+alias 'venvd'='deactivate'
+
+
 dusort() {
     dir="${1:-./}"
 	du -h "$dir" --max-depth=1 | sort -h
