@@ -1,7 +1,57 @@
-#!/usr/bin/env sh
+#!/bin/bash
+#
+# Upload e-book files to a remote location.
 
-read -p "Upload all files in cwd to pstet@192.168.2.160? (Y/n) " choice
+err() {
+    echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
 
-if [[ -z $choice ]] || [[ $choice == [yY] ]]; then
-    scp ./* pstet@192.168.2.160:/srv/docker/bookshelf/calibre/upload/
+print_usage() {
+    echo "Usage: ubooks [options] files"
+}
+
+while getopts ":p:d:" opt; do
+    case "$opt" in
+        p) REMOTE_PATH="$OPTARG" ;;
+        d) BOOK_DIR="$OPTARG" ;;
+        :)
+            err "Option -${OPTARG} requires an argument."
+            exit 1
+            ;;
+        *)
+            err "Invalid option: -${OPTARG}"
+            exit 1
+            ;;
+    esac
+done
+
+if [ ! "$BOOK_DIR" ]; then
+    BOOK_DIR="."
 fi
+
+if [ ! "$REMOTE_PATH" ]; then
+    REMOTE_PATH="pstet@192.168.2.160:/srv/docker/bookshelf/calibre/upload/"
+fi
+
+mapfile -t book_files < <(find "${BOOK_DIR}" -type f \( -iname "*.pdf" -o \
+                                           -iname "*.epub" -o \
+                                           -iname "*.mobi" -o \
+                                           -iname "*.txt" -o \
+                                           -iname "*.html" -o \
+                                           -iname "*.azw" \))
+
+echo "Uploading files to ${REMOTE_PATH}."
+for file in "${book_files[@]}"; do
+    read -rp "Upload ${file} to remote path? [Y/n]: " choice
+
+    if [[ "$choice" == [Yy] || -z "$choice" ]]; then
+        rsync -av "${file}" "$REMOTE_PATH"
+
+        read -rp "Remove local file? [Y/n]: " remove
+
+        if [[ "$remove" == [Yy] || -z "$remove" ]]; then
+            rm "$file"
+        fi
+    fi
+done
+
