@@ -38,6 +38,7 @@ mapfile -t book_files < <(find "${BOOK_DIR}" -type f \( -iname "*.pdf" -o \
                                            -iname "*.mobi" -o \
                                            -iname "*.txt" -o \
                                            -iname "*.html" -o \
+                                           -iname "*.fb2" -o \
                                            -iname "*.azw" \))
 
 echo "Uploading files to ${REMOTE_PATH}."
