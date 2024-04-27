@@ -1,0 +1,34 @@
+#!/bin/bash
+
+name=$1
+
+if [ ! "$name" ]; then
+    echo "No name entered"
+    exit 1
+fi
+
+idx=1
+
+mkdir -p "$name"
+
+for file in *.jpg *.JPG *.png *.PNG *.jpg *.jpeg *.JPEG *.webp *.WEBP; do
+    
+    if [ ! -f "$file" ]; then
+        continue
+    fi
+
+    new_name="${name}/${name}_${idx}.jpg"
+
+    if [[ $file == *.png || $file == *.PNG || $file == *.webp || $file == *.WEBP ]]; then
+        convert "$file" "$new_name"
+        rm "$file"
+    else
+        mv "$file" "$new_name"
+    fi
+
+
+
+    idx=$((${idx} + 1))
+done
+
+

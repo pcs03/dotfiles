@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+#
+# Backup a directory containing docker compose stacks with data folders
+
+if [[ $# -lt 2 ]]; then
+    echo "Usage: $0 docker-directory target-file [exclude_directories ...]" >&2
+    exit 1
+fi
+
+BACKUP_DIR="$1"
+shift
+TARGET_DIR="$1"
+shift
+
+
+if [[ ! -d "$BACKUP_DIR" ]]; then
+    echo "Given directory is not valid."
+    exit 1
+fi
+
+if [[ ! -d "$TARGET_DIR" ]]; then
+    echo "Given target directory is not valid."
+    exit 1
+fi
+
+current_datetime=$(date +"%Y-%m-%dT%H%M")
+TARGET_DIR="${TARGET_DIR}/${current_datetime}"
+mkdir -p "$TARGET_DIR"
+
+exclude_dirs=()
+
+for dir in "$@"; do
+    if [[ ! -d "${BACKUP_DIR}/${dir}" ]]; then
+        echo "Diretory '${dir}' is not present in '${BACKUP_DIR}'."
+        exit 1
+    fi
+
+    exclude_dirs+=("$dir")
+done
+
+echo "${exclude_dirs[@]}"
+
+for dir in "$BACKUP_DIR"/*; do
+    if [[ ! -d "$dir" ]]; then
+        continue
+    fi
+
+    dir_name=$(basename "$dir")
+
+    if [[ -d "${TARGET_DIR}" ]]; then
+        echo "${TARGET_DIR}/${dir_name}.tar.gz"
+    fi
+
+    if [[ " ${exclude_dirs[@]} " =~ " $dir_name " ]]; then
+        echo "excl ${dir_name}"
+    else
+        echo "Backup up '${dir_name}'."
+
+        sudo tar czf "${TARGET_DIR}/${dir_name}.tar.gz" "${BACKUP_DIR}/${dir_name}" 
+    fi
+done
+
+
+
