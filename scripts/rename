@@ -1,13 +1,33 @@
 #!/bin/bash
+#
+# Script used to batch rename image files in a directory
 
-name=$1
+Help()
+{
+    # Display help
+    echo "rename - Batch rename image files in directory"
+    echo
+    echo "Syntax: rename <new_name> [starting_idx]"
+    echo
+    echo "positional arguments:"
+    echo "new_name      New name for the image files"
+    echo "starting_idx  Starting index to for renamed files, default = 1"
+    echo
+}
 
-if [ ! "$name" ]; then
-    echo "No name entered"
+name="$1"
+idx="$2"
+
+if [[ ! "$name" ]]; then
+    echo "No name entered. Help: "
+    echo
+    Help
     exit 1
 fi
 
-idx=1
+if [[ ! "$idx" ]]; then
+    idx=1
+fi
 
 mkdir -p "$name"
 
