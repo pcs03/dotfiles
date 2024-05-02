@@ -27,9 +27,5 @@ return {
 
     -- Indent guides blanklines
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-
-    -- Context
-    { "nvim-treesitter/nvim-treesitter-context", opts = {} },
-
 }
 
