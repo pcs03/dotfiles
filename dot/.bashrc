@@ -85,6 +85,10 @@ alias 'venv'='source venv/bin/activate'
 alias 'venvc'='python -m venv venv && source venv/bin/activate'
 alias 'venvd'='deactivate'
 
+# Copy paste in terminal
+alias ccc='xsel --input --clipboard'
+alias ppp='xsel --output --clipboard'
+
 
 dusort() {
     dir="${1:-./}"
