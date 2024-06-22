@@ -1,5 +1,6 @@
 return {
     "nvimtools/none-ls.nvim",
+    event = "VeryLazy",
     opts = function(_, opts)
         local nls = require("null-ls")
         local formatting = nls.builtins.formatting
@@ -25,6 +26,13 @@ return {
 
             -- LaTeX
             formatting.latexindent,
+
+            -- C++
+            formatting.clang_format,
+
+            -- GO
+            formatting.gofmt,
+            formatting.goimports,
 
         })
         return opts
