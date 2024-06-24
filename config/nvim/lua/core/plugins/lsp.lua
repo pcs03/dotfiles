@@ -56,20 +56,29 @@ return {
 			local opts = { buffer = bufnr}
 			local keymap = vim.keymap
 
-			opts.desc = "Show LSP definition"
+            local ts = require("telescope.builtin")
+
+            -- Jump to definition of the word under the cursor
+			opts.desc = "[G]oto [D]efinition"
 			keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+
+            opts.desc = "[G]oto [R]eferences"
+            keymap.set("n", "gr", ts.lsp_references, opts)
+
+            opts.desc = "[G]oto [I]mplementation"
+            keymap.set("n", "gI", ts.lsp_implementations, opts)
+
+            opts.desc = "[G]oto [D]efinition"
+            keymap.set("n", "<leader>D", ts.lsp_type_definitions, opts)
 
 			opts.desc = "Go to declaration"
 			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-			opts.desc = "Go to implementations"
-			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
+            opts.desc = "[D]ocument [S]ymbols"
+            keymap.set("n", "<leader>ds", ts.lsp_document_symbols, opts)
 
-			opts.desc = "Go to references"
-			keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
-
-			opts.desc = "Go to type definition"
-			keymap.set("n", "go", "<cmd>Telescope lsp_type_definitions<cr>", opts)
+            opts.desc = "[W]orkspace [S]ymbols"
+            keymap.set("n", "<leader>ws", ts.lsp_dynamic_workspace_symbols, opts)
 
 			opts.desc = "Show signiture information"
 			keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
@@ -77,16 +86,16 @@ return {
             opts.desc = "Show diagnostics"
             keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 
-			opts.desc = "Show documentation under cursor"
+			opts.desc = "Hover Documentation"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-			opts.desc = "Smart rename"
+			opts.desc = "[R]e[N]ame"
 			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
 			opts.desc = "Format document"
 			keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts)
 
-            opts.desc = "Show code actions"
+            opts.desc = "[C]ode [A]ction"
             keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
             opts.desc = "Move to previous diagnostic"
@@ -126,8 +135,23 @@ return {
 
 
 				lua_ls = function()
-					local lua_opts = lsp.nvim_lua_ls()
-					require("lspconfig").lua_ls.setup(lua_opts)
+					require("lspconfig").lua_ls.setup({
+                        settings = {
+                            Lua = {
+                                runtime = { version = "LuaJIT" },
+                                workspace = {
+                                    checkThirdParty = false,
+                                    library = {
+                                        '${3rd}/luv/library',
+                                        unpack(vim.api.nvim_get_runtime_file('', true)),
+                                    },
+                                },
+                                completion = {
+                                    callSnippet = 'Replace',
+                                },
+                            },
+                        },
+                    })
 				end,
 
                 gopls = function()
