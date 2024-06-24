@@ -25,6 +25,9 @@ return {
     -- Show keybinds
     { "folke/which-key.nvim", opts = {} },
 
+    -- Highlight, todo notes, fixme in comments
+    { "folke/todo-comments.nvim", opts = {signs = false} },
+
     -- Indent guides blanklines
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 }
