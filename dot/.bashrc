@@ -35,23 +35,8 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # Aliases
-alias 'ssh-server'='ssh pstet@192.168.2.160'
-alias 'sftp-server'='sftp pstet@192.168.2.160'
 alias 'wake-server'='sudo ether-wake 58:11:22:d8:ac:65'
-
-alias 'ssh-pc'='ssh pstet@192.168.2.162'
-alias 'sftp-pc'='sftp pstet@192.168.2.162'
 alias 'wake-pc'='sudo ether-wake 2c:f0:5d:0e:b1:b6'
-
-alias 'ssh-pi3'='ssh pstet@192.168.2.189'
-alias 'sftp-pi3'='sftp pstet@192.168.2.189'
-
-alias 'ssh-pi4'='ssh pstet@192.168.2.197'
-alias 'sftp-pi4'='sftp pstet@192.168.2.197'
-
-alias 'ssh-sd'='ssh deck@192.168.2.191'
-alias 'sftp-sd'='sftp deck@192.168.2.191'
-
 
 alias 'pubip'='echo "ipv4: $(curl -s ipinfo.io/ip)" && echo "ipv6: $(curl -s ifconfig.co)"'
 alias 'ports'='sudo netstat -tulpn'
@@ -183,4 +168,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# FZF 
+eval "$(fzf --bash)"
 
