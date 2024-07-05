@@ -27,22 +27,29 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
-for dotfile in $(ls -A "$HOME/.dotfiles/dot"); do
-    if [[ -f "$HOME/$dotfile" ]]; then
-        echo -n "$dotfile already exists. "
+dotfiles_dir="$HOME/.dotfiles/dot"
+
+for dotfile in $(find "$dotfiles_dir" -type f); do
+    relative_path="${dotfile#$dotfiles_dir/}"
+    target="$HOME/$relative_path"
+    
+    if [[ -f "$target" ]]; then
+        echo -n "$relative_path already exists. "
     else
-        echo -n "$dotfile does not exist. "
+        echo -n "$relative_path does not exist. "
     fi
 
-    read -p "Symlink $dotfile? (Y/n): " choice
+    read -p "Symlink $relative_path? (Y/n): " choice
     if [[ -z "$choice" ]] || [[ "$choice" == [yY] ]]; then
-        if [[ -f "$HOME/$dotfile" ]]; then
-            rm "$HOME/$dotfile"
-            echo "  Removed existing $dotfile."
+        if [[ -f "$target" ]]; then
+            rm "$target"
+            echo "  Removed existing $relative_path."
         fi
 
-        ln -s "$HOME/.dotfiles/dot/$dotfile" "$HOME/$dotfile"
-        echo "  Created symlink for $dotfile"
+        mkdir -p "$(dirname "$target")"
+
+        ln -s "$dotfile" "$target"
+        echo "  Created symlink for $relative_path"
         echo ""
     fi
 done
