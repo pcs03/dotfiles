@@ -109,7 +109,7 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "tsserver",
-                "eslint-lsp",
+                "eslint",
                 "html",
                 "cssls",
                 "lua_ls",
