@@ -1,4 +1,7 @@
 return {
+    -- Useful Lua Functions
+    "nvim-lua/plenary.nvim",
+
     -- Git and GitHub integration
     "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
