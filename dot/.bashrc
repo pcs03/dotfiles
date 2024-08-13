@@ -34,7 +34,12 @@ if [ -f ~/.bash_aliases ]; then
 	. ~/.bash_aliases
 fi
 
+
+#########
 # Aliases
+#########
+
+# Wake on LAN commands
 alias 'wake-server'='sudo ether-wake 58:11:22:d8:ac:65'
 alias 'wake-pc'='sudo ether-wake 2c:f0:5d:0e:b1:b6'
 
@@ -76,6 +81,9 @@ alias 'venvd'='deactivate'
 # Copy paste in terminal
 alias ccc='xsel --input --clipboard'
 alias ppp='xsel --output --clipboard'
+
+# Arduino
+alias acli="arduino-cli"
 
 
 dusort() {

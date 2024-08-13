@@ -1,0 +1,6 @@
+if [[ -f /usr/bin/arduino-cli && -z $(complete | grep arduino) ]]; then
+    sudo arduino-cli completion bash > /etc/bash_completion.d/arduino-cli
+    echo "aies"
+fi
+
+complete -F __start_arduino-cli acli
