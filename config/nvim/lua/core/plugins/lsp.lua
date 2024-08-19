@@ -120,7 +120,6 @@ return {
 				"lua_ls",
 				"emmet_ls",
 				"pyright",
-				"arduino_language_server",
 				"clangd",
 				"bashls",
 				"cmake",
