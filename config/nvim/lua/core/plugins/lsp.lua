@@ -183,29 +183,14 @@ return {
 					})
 				end,
 
-				arduino_language_server = function()
-					require("lspconfig").arduino_language_server.setup({
-						capabilities = {
-							textDocument = {
-								semanticTokens = vim.NIL,
-							},
-							workspace = {
-								semanticTokens = vim.NIL,
-							},
-						},
-						cmd = {
-							"arduino-language-server",
-							"-cli-config",
-							"~/.arduino15/arduino-cli.yaml",
-							"-cli",
-							"/usr/bin/arduino-cli",
-							"-clangd",
-							"/usr/bin/clangd",
-							"-fqbn",
-							"arduino:avr:leonardo",
-						},
-					})
-				end,
+                clangd = function()
+                    require("lspconfig").clangd.setup({
+                        cmd = {
+                            "clangd",
+                            "--offset-encoding=utf-16",
+                        },
+                    })
+                end
 			},
 		})
 	end,
