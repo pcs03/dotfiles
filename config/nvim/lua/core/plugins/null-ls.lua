@@ -1,5 +1,8 @@
 return {
     "nvimtools/none-ls.nvim",
+    dependencies = {
+        "nvimtools/none-ls-extras.nvim",
+    },
     event = "VeryLazy",
     opts = function(_, opts)
         local nls = require("null-ls")
@@ -20,8 +23,7 @@ return {
 
             -- JS / TS
             formatting.prettierd,
-
-            -- LaTeX
+            require("none-ls.diagnostics.eslint_d"),
 
             -- C++
             formatting.clang_format,
