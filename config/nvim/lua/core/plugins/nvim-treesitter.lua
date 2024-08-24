@@ -47,7 +47,6 @@ return {
                     "c",
                     "cpp",
                     "c_sharp",
-                    "arduino",
                     "cmake",
                     "csv",
                     "latex",
