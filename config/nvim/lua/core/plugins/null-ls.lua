@@ -25,7 +25,7 @@ return {
             actions.eslint_d,
 
             -- LaTeX
-            formatting.latexindent,
+            -- formatting.latexindent,
 
             -- C++
             formatting.clang_format,
