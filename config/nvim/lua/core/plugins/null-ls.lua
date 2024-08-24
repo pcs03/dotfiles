@@ -17,15 +17,11 @@ return {
                 extra_args = { "--preview", "--line-length", "120"}
             }),
             formatting.isort,
-            diagnostics.ruff,
 
             -- JS / TS
             formatting.prettierd,
-            diagnostics.eslint_d,
-            actions.eslint_d,
 
             -- LaTeX
-            -- formatting.latexindent,
 
             -- C++
             formatting.clang_format,
