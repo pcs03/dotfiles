@@ -14,7 +14,7 @@ return {
 		"rafamadriz/friendly-snippets",
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-        "ray-x/lsp_signature.nvim",
+		"ray-x/lsp_signature.nvim",
 	},
 	config = function()
 		local lsp = require("lsp-zero")
@@ -28,9 +28,9 @@ return {
 		local cmp_action = require("lsp-zero").cmp_action()
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-        require("lsp_signature").setup({
-            hint_enable = false,
-        })
+		require("lsp_signature").setup({
+			hint_enable = false,
+		})
 
 		cmp.setup({
 			sources = {
@@ -182,14 +182,20 @@ return {
 					})
 				end,
 
-                clangd = function()
-                    require("lspconfig").clangd.setup({
-                        cmd = {
-                            "clangd",
-                            "--offset-encoding=utf-16",
-                        },
-                    })
-                end
+				clangd = function()
+					require("lspconfig").clangd.setup({
+						cmd = {
+							"clangd",
+							"--offset-encoding=utf-16",
+							"--background-index",
+							"--clang-tidy",
+							"--log=verbose",
+							"--compile-commands-dir=.",
+							"--compile-commands-dir=build",
+						},
+						root_dir = util.root_pattern(".clang-format", "compile_commands.json", "compile_flags.json", ".git"),
+					})
+				end,
 			},
 		})
 	end,
