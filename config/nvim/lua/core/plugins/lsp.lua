@@ -177,6 +177,8 @@ return {
 						init_options = {
 							preferences = {
 								disableSuggestions = true,
+								importModuleSpecifierPreference = "relative",
+								importModuleSpecifierEnding = "minimal",
 							},
 						},
 					})
@@ -193,7 +195,12 @@ return {
 							"--compile-commands-dir=.",
 							"--compile-commands-dir=build",
 						},
-						root_dir = util.root_pattern(".clang-format", "compile_commands.json", "compile_flags.json", ".git"),
+						root_dir = util.root_pattern(
+							".clang-format",
+							"compile_commands.json",
+							"compile_flags.json",
+							".git"
+						),
 					})
 				end,
 			},
