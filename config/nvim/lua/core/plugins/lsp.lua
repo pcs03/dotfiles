@@ -63,19 +63,23 @@ return {
 
 			local ts = require("telescope.builtin")
 
-			-- Jump to definition of the word under the cursor
+            -- This is where the variable was first declared, or the function first defined
 			opts.desc = "[G]oto [D]efinition"
-			keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+			keymap.set("n", "gd", ts.lsp_definitions, opts)
 
+            -- Definition of its type, not where it was defined
+            opts.desc = "[G]oto [D]efinition"
+            keymap.set("n", "<leader>D", ts.lsp_type_definitions, opts)
+
+            -- References for the word under cursor
 			opts.desc = "[G]oto [R]eferences"
 			keymap.set("n", "gr", ts.lsp_references, opts)
 
+            -- Implementations for word under cursor
 			opts.desc = "[G]oto [I]mplementation"
 			keymap.set("n", "gI", ts.lsp_implementations, opts)
 
-			opts.desc = "[G]oto [D]efinition"
-			keymap.set("n", "<leader>D", ts.lsp_type_definitions, opts)
-
+            -- Declaration, this would take you to the header in C
 			opts.desc = "Go to declaration"
 			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
