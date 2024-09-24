@@ -133,6 +133,7 @@ return {
 				"rust_analyzer",
 				"sqlls",
 				"texlab",
+                "ansiblels",
 			},
 			handlers = {
 				function(server_name)
