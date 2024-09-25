@@ -94,10 +94,10 @@ keymap({"v", "x"}, "p", "\"_dP", opts)
 
 -- Copy/Paste to the system clipboard
 opts.desc = "Yank to System Clipboard"
-keymap({"n", "v"}, "<leader>y", [["+y"]], opts)
+keymap({"n", "v"}, "<leader>y", '"+y', opts)
 
 opts.desc = "Paste from System Clipboard"
-keymap({"n", "v"}, "<leader>p", [["+p"]], opts)
+keymap({"n", "v"}, "<leader>p", '"+p', opts)
 
 -- To make sure ctrl + C will always exit out of everything
 opts.desc = "Escape"
