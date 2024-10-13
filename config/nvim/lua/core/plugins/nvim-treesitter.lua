@@ -55,7 +55,6 @@ return {
                     "sql",
                     "toml",
                     "bibtex",
-                    "latex"
                 },
                 
                 -- Auto install missing parsers
