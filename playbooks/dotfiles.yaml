@@ -1,0 +1,13 @@
+---
+- name: Update dotfiles
+  hosts: localhost
+  become: false
+
+
+  tasks:
+    - name: Make sure dotfiles git repo is present
+      ansible.builtin.git:
+        repo: https://github.com/pcs03/dotfiles.git
+        dest: ~/.dotfiles
+        version: main
+        update: true
