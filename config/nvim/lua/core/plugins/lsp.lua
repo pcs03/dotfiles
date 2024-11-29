@@ -117,7 +117,7 @@ return {
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"tsserver",
+				"ts_ls",
 				"eslint",
 				"html",
 				"cssls",
@@ -178,8 +178,8 @@ return {
 					})
 				end,
 
-				tsserver = function()
-					require("lspconfig").tsserver.setup({
+				ts_ls = function()
+					require("lspconfig").ts_ls.setup({
 						init_options = {
 							preferences = {
 								disableSuggestions = true,

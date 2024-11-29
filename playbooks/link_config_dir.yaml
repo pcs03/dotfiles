@@ -1,7 +1,6 @@
 ---
-- name: Update dotfiles
+- name:  Link a config directory to XDG_CONFIG_HOME
   hosts: localhost
-  gather_facts: true
   become: false
 
   vars:
