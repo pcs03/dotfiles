@@ -134,6 +134,7 @@ return {
 				"sqlls",
 				"texlab",
                 "ansiblels",
+                "bicep"
 			},
 			handlers = {
 				function(server_name)
