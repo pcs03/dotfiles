@@ -123,7 +123,7 @@ return {
 				"cssls",
 				"lua_ls",
 				"emmet_ls",
-				"pyright",
+				"basedpyright",
 				"clangd",
 				"bashls",
 				"cmake",

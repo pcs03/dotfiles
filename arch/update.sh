@@ -81,3 +81,10 @@ fi
 echo "Enabling & Starting docker"
 sudo systemctl enable docker
 sudo systemctl start docker
+
+# Install yay
+# Update repositorise w yay
+# Enable wake on LAN
+# Install base packages
+# Install desktop packages (optional)
+# Install hyprland packages (optional)

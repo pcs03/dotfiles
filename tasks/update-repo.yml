@@ -1,0 +1,6 @@
+---
+- name: Pull changes
+  ansible.builtin.git:
+    repo: https://github.com/pcs03/dotfiles
+    dest: ~/.dotfiles
+    update: true

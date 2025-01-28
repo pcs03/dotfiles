@@ -3,71 +3,74 @@
   hosts: localhost
   gather_facts: true
   become: false
-
-  vars:
-    config_directories:
-      # Config directories that will be linked to XDG_CONFIG_HOME
-      # If a directory already exists there, it will be deleted
-      # Comment out what should not be symlinked
-      # Desktop/Server
-      - nvim
-      - tmux
-      - zsh
-      - kitty
-      # Tiling Window Manager:
-      - hypr
-      - swaylock
-      - waybar
-      - wlogout
-      - wofi
-      # other desktop packages:
-      - zathura
-    dotfiles:
-      # Dotfiles that will be placed in HOME
-      # If the dotfile already exists, it will be deleted
-      # Comment out what should not be symlinked
-      # TODO: .ssh dir should not be entirely copied, only config in it should
-      - .ssh
-      - .bashrc
-      - .bash_profile
-      - .bash_completion
-      - .gitconfig
-      - .ideavimrc
-      - .vimrc
-      - .zshenv
-
+  vars_files:
+    - vars/test.yml
+    # - vars/dotfiles.yml
+  # vars:
+  #   dotfiles_dir: "{{ ansible_user_dir }}/.dotfiles/"
+  #   config_dir: "{{ ansible_user_dir }}/.config/"
   tasks:
-    - name: Print out ansible facts
-      ansible.builtin.debug:
-        var: ansible_facts
+    # - name: Make sure dotfiles git repo is present
+    #   ansible.builtin.git:
+    #     repo: https://github.com/pcs03/dotfiles.git
+    #     dest: ~/.dotfiles
+    #     version: main
+    #     update: true
+    #
+    # - name: Print facts
+    #   ansible.builtin.debug:
+    #     msg: >-
+    #       FQDN {{ ansible_fqdn }}
+    #       IP {{ ansible_default_ipv4.address }}
+    #       dotfiles {{ dotfiles }}
+    #
+    # - name: Symlink dotfiles
+    #   ansible.builtin.debug:
+    #     var: "{{ item }}"
+    #     # src: "{{ dotfiles_dir }}/dot/{{ item }}"
+    #     # dest: "{{ ansible_user_dir }}/{{ item }}"
+    #     # state: link
+    #   loop: "{{ dotfiles }}"
+    # - name: Install base packages
+    #   ansible.builtin.
 
-    - name: Print out the distribution
+    - name: Print
       ansible.builtin.debug:
-        msg: "{{ ansible_distribution }}"
+        var: test_var
 
-    - name: "Print ansible env HOME"
-      ansible.builtin.debug:
-        msg: "{{ ansible_env.HOME }}"
-
-    - name: "Print ansible env XDG_CONFIG_HOME"
-      ansible.builtin.debug:
-        msg: "{{ ansible_env.XDG_CONFIG_HOME }}"
-
-    - name: List all config directories
+    - name: Ensure AUR and packages are installed for Arch Linux
+      when: ansible_facts['distribution'] == "Archlinux"
       block:
-        - name: Print 1
+        - name: Ensure aur_builder user for AUR is present
+          become: true
+          ansible.builtin.user:
+            name: aur_builder
+            create_home: true
+            group: wheel
+
+        - name: Ensure aur_builder user has sudo access
+          become: true
+          ansible.builtin.lineinfile:
+            path: /etc/sudoers.d/aur_builder
+            line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+            create: true
+            mode: '0644'
+            validate: 'visudo -cf %s'
+
+        - name: Ensure yay is installed
+          kewlfft.aur.aur:
+            name: yay
+            use: makepkg
+            state: present
+          become: true
+          become_user: aur_builder
+
+        - name: Print packages
           ansible.builtin.debug:
-            msg: "Print1: {{ item }}"
-        - name: Print 2
-          ansible.builtin.debug:
-            msg: "Print2: {{ item }}"
-      with_items: "{{ config_directories }}"
+            msg: "{{ packages[ansible_facts['distribution']]['base'] }}"
 
-
-
-      # - name: Make sure dotfiles git repo is present
-      #   ansible.builtin.git:
-      #     repo: https://github.com/pcs03/dotfiles.git
-      #     dest: ~/.dotfiles
-      #     version: main
-      #     update: true
+        # - name: Ensure base packages are installed
+        #   kewlfft.aur.aur:
+        #     use: yay
+        #     name: "{{ packages[ansible_facts['distribution']][base] }}"
+        #     state: latest
