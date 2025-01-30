@@ -1,7 +1,6 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre", "BufNewFile" },
         build = ":TSUpdate",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
@@ -55,6 +54,7 @@ return {
                     "sql",
                     "toml",
                     "bibtex",
+                    "latex"
                 },
                 
                 -- Auto install missing parsers
