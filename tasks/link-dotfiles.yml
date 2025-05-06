@@ -1,0 +1,40 @@
+- name: Get the passwd entry of user
+  ansible.builtin.command: "getent passwd {{ dotfile_user }}"
+  register: getent_result
+  changed_when: false
+
+- name: Set the user home directory
+  ansible.builtin.set_fact:
+    dotfile_user_home: "{{ getent_result.stdout.split(':')[5] }}"
+    dotfile_user_group: "{{ getent_result.stdout.split(':')[3] }}"
+
+- name: Ensure git dotfiles repository present
+  ansible.builtin.git:
+    repo: 'https://github.com/pcs03/dotfiles.git'
+    dest: "{{ dotfile_user_home }}/.dotfiles"
+    update: false
+  become: true
+  become_user: "{{ dotfile_user }}"
+
+- name: Ensure each config directory is linked
+  ansible.builtin.include_tasks:
+    file: tasks/link-config.yml
+  vars:
+    link_source: "{{ dotfile_user_home }}/.dotfiles/config/{{ config_name }}"
+    link_dest: "{{ dotfile_user_home }}/.config/{{ config_name }}"
+  loop: "{{ config_directories }}"
+  loop_control:
+    loop_var: config_name
+
+- name: Ensure dotfiles are present
+  ansible.builtin.file:
+    src: "{{ dotfile_user_home }}/.dotfiles/dot/{{ dotfile }}"
+    dest: "{{ dotfile_user_home }}/{{ dotfile }}"
+    owner: "{{ dotfile_user }}"
+    group: "{{ dotfile_user_group }}"
+    state: link
+    follow: false
+    force: true
+  loop: "{{ dotfiles }}"
+  loop_control:
+    loop_var: dotfile

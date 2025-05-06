@@ -1,0 +1,21 @@
+- name: Retrieve stat of destination config
+  ansible.builtin.stat:
+    path: "{{ link_dest }}"
+  register: config_stat
+
+- name: Remove destination directory if not linked to desired source
+  ansible.builtin.file:
+    path: "{{ link_dest }}"
+    state: absent
+  when:
+    - config_stat.stat.exists
+    - not config_stat.stat.islnk or config_stat.stat.lnk_source != link_source
+
+- name: Ensure destination dir linked
+  ansible.builtin.file:
+    src: "{{ link_source }}"
+    dest: "{{ link_dest }}"
+    owner: "{{ dotfile_user }}"
+    group: "{{ dotfile_user_group }}"
+    state: link
+    follow: false

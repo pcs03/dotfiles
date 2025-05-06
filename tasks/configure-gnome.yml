@@ -1,0 +1,32 @@
+- name: Ensure dark theme
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/color-scheme"
+    value: "'prefer-dark'"
+    state: present
+  become: true
+  become_user: "{{ gnome_user }}"
+  loop: "{{ gnome_users }}"
+  loop_control:
+    loop_var: gnome_user
+
+- name: Ensure legacy GTK apps have dark theme
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/gtk-theme"
+    value: "'Adwaita-dark'"
+    state: present
+  become: true
+  become_user: "{{ gnome_user }}"
+  loop: "{{ gnome_users }}"
+  loop_control:
+    loop_var: gnome_user
+
+- name: Ensure windows have minimize button
+  community.general.dconf:
+    key: "/org/gnome/desktop/wm/preferences/button-layout"
+    value: "':minimize,close'"
+    state: present
+  become: true
+  become_user: "{{ gnome_user }}"
+  loop: "{{ gnome_users }}"
+  loop_control:
+    loop_var: gnome_user

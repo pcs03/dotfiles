@@ -1,9 +1,77 @@
 ---
 - name: Configure personal Linux systems
-  hosts: localhost
+  hosts: guarnere.pcstet.home
   become: true
-  become_user: ansible
+  vars:
+    gnome_users:
+      - pstet
+  handlers:
+    - import_tasks: handlers/main.yml
   tasks:
-    - name: Setup dotfiles and configs
-      ansible.builtin.include_role:
-        name: dotfiles
+    - name: Ensure 'yay' AUR helper is installed
+      kewlfft.aur.aur:
+        name: yay
+        use: makepkg
+        state: present
+      become: false
+
+    - name: Install base packages (Debian)
+      ansible.builtin.apt:
+        name: "{{ base_packages[ansible_os_family] }}"
+      when: ansible_os_family == 'Debian'
+
+    - name: Install base packages (Archlinux)
+      kewlfft.aur.aur:
+        name: "{{ base_packages[ansible_os_family] }}"
+        use: "yay"
+        state: present
+      when: ansible_os_family == "Archlinux"
+      become: false
+
+    - name: Install desktop packages (Debian)
+      ansible.builtin.apt:
+        name: "{{ desktop_packages[ansible_os_family] }}"
+      when: ansible_os_family == 'Debian' and is_desktop
+
+    - name: Install desktop packages (Archlinux)
+      kewlfft.aur.aur:
+        name: "{{ desktop_packages[ansible_os_family] }}"
+        use: "yay"
+        state: present
+      when: ansible_os_family == "Archlinux" and is_desktop
+      become: false
+
+    - name: Install flatpaks
+      community.general.flatpak:
+        name: "{{ flatpak_packages }}"
+        state: latest
+      when: is_desktop
+
+    - name: Configure gnome settings
+      ansible.builtin.include_tasks:
+        file: tasks/configure-gnome.yml
+
+    - name: Ensure dotfiles and config directories are linked
+      ansible.builtin.include_tasks:
+        file: tasks/link-dotfiles.yml
+      vars:
+        config_directories:
+          - nvim
+          - tmux
+          - kitty
+          - zathura
+          - zsh
+        dotfiles:
+          - .bash_completion
+          - .bash_profile
+          - .bashrc
+          - .gitconfig
+          - .ideavimrc
+          - .vimrc
+          - .zshenv
+        dotfile_user: pstet
+
+    - name: Enable wake on LAN
+      ansible.builtin.include_tasks:
+        file: tasks/enable-wol.yml
+      when: enable_wol

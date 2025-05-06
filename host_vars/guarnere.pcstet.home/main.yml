@@ -1,0 +1,18 @@
+is_desktop: true
+enable_wol: true
+
+config_directories:
+  - nvim
+  - tmux
+  - kitty
+  - zsh
+  - zathura
+
+dotfiles:
+  - .bash_completion
+  - .bash_profile
+  - .bashrc
+  - .gitconfig
+  - .ideavimrc
+  - .vimrc
+  - .zshenv

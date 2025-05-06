@@ -1,0 +1,9 @@
+- name: Systemd daemon reload
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Start wol.service
+  ansible.builtin.service:
+    name: wol.service
+    state: started
+    

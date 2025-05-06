@@ -1,0 +1,86 @@
+base_packages:
+  Ubuntu:
+    - build-essential
+    - git
+    - bash-completion
+    - ethtool
+    - exa
+    - neofetch
+    - nodejs
+    - neovim
+    - vim
+    - npm
+    - ntfs-3g
+    - rsync
+    - yt-dlp
+    - ripgrep
+    - tmux
+    - jq
+    - ffmpeg
+  Archlinux: # Note: These packages include ones from AUR. Thus, this list needs to be installed using AUR.
+    - base-devel
+    - git
+    - bash-completion
+    - ethtool
+    - eza
+    - exfat-utils
+    - neofetch
+    - nodejs
+    - neovim
+    - jq
+    - vim
+    - npm
+    - ntfs-3g
+    - rsync
+    - docker
+    - docker-compose
+    - yt-dlp
+    - ripgrep
+    - tmux
+    - kitty
+    - btop
+    - ffmpeg
+    - tree-sitter-cli
+
+desktop_packages:
+  Ubuntu:
+    - gnome
+    - fonts-jetbrains-mono
+    - fonts-font-awesome
+    - fonts-noto
+    - fonts-cjk
+    - fonts-noto-extra
+    - fonts-noto-color-emoji
+    - thunderbird
+    - wl-clipboard
+    - hardinfo
+    - mpv
+  Archlinux: # Note: These packages include ones from AUR. Thus, this list needs to be installed using AUR.
+    - gnome
+    - visual-studio-code-bin
+    - ether-bin
+    - postman-bin
+    - stabilitymatrix
+    - obsidian
+    - steam
+    - noto-fonts
+    - noto-fonts-cjk
+    - noto-fonts-extra
+    - noto-fonts-emoji
+    - ttf-jetbrains-mono-nerd
+    - ttf-font-awesome
+    - virtualbox
+    - qmk
+    - wl-clipboard
+    - hardinfo
+    - zathura
+    - zathura-pdf-mupdf
+    - texlive
+    - pavucontrol
+
+flatpak_packages:
+  - com.github.iwalton3.jellyfin-media-player
+  - com.github.tchx84.Flatseal
+  - com.mattjakeman.ExtensionManager
+  - com.spotify.Client
+  - io.gitlab.librewolf-community

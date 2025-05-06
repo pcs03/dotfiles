@@ -1,0 +1,18 @@
+- name: Ensure persistent wake on lan configuration is present
+  ansible.builtin.template:
+    src: wol.service.j2
+    dest: /etc/systemd/system/wol.service
+    mode: "0644"
+    owner: root
+    group: root
+  notify:
+    - Systemd daemon reload
+    - Start wol.service
+
+- name: Ensure system daemon-reload is triggered
+  ansible.builtin.meta: flush_handlers
+
+- name: Ensure wol service is enabled and started
+  ansible.builtin.service:
+    name: wol.service
+    enabled: true
