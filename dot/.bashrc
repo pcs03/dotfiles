@@ -86,6 +86,18 @@ alias ppp='xsel --output --clipboard'
 alias acli="arduino-cli"
 
 
+# Android studio command
+studio() {
+    dir="${1:-./}"
+    (nohup android-studio &> /dev/null "$dir" &)
+}
+
+# Intellij IDEA command
+idea() {
+    dir="${1:-./}"
+    (nohup /usr/bin/idea &> /dev/null "$dir" &)
+}
+
 dusort() {
     dir="${1:-./}"
 	du -h "$dir" --max-depth=1 | sort -h

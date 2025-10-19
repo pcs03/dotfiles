@@ -24,7 +24,9 @@ nmap n nzzzv
 nmap N Nzzzv
 
 " Format code
-nnoremap <leader>lf :action ReformatCode<CR>
+nmap <leader>lf :action ReformatCode<CR>
+nmap <leader>li :action OptimizeImports<CR> 
+
 
 " FIletree
 Plug 'preservim/nerdtree'
@@ -32,6 +34,10 @@ nmap <leader>e :NERDTreeToggle<CR>
 nmap <leader>u :action SelectInProjectView<CR>
 nmap gl :action ShowErrorDescription<CR>
 nmap <leader>rn :action RenameElement<CR>
+
+" IDE functions
+nmap <leader>rr :action Run<CR>
+nmap <leader>bb :action BuildProject<CR>
 
 
 " Y/P from sys clipboard
