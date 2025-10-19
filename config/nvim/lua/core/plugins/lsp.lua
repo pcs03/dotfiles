@@ -117,22 +117,15 @@ return {
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"tsserver",
-				"eslint",
+				"ts_ls",
 				"html",
-				"cssls",
 				"lua_ls",
-				"emmet_ls",
 				"basedpyright",
-				"clangd",
 				"bashls",
-				"cmake",
 				"dockerls",
 				"docker_compose_language_service",
-				"jsonls",
-				"rust_analyzer",
 				"sqlls",
-				"texlab",
+                "gopls",
                 "ansiblels",
                 "bicep"
 			},
@@ -175,38 +168,6 @@ return {
 								},
 							},
 						},
-					})
-				end,
-
-				tsserver = function()
-					require("lspconfig").tsserver.setup({
-						init_options = {
-							preferences = {
-								disableSuggestions = true,
-								importModuleSpecifierPreference = "relative",
-								importModuleSpecifierEnding = "minimal",
-							},
-						},
-					})
-				end,
-
-				clangd = function()
-					require("lspconfig").clangd.setup({
-						cmd = {
-							"clangd",
-							"--offset-encoding=utf-16",
-							"--background-index",
-							"--clang-tidy",
-							"--log=verbose",
-							"--compile-commands-dir=.",
-							"--compile-commands-dir=build",
-						},
-						root_dir = util.root_pattern(
-							".clang-format",
-							"compile_commands.json",
-							"compile_flags.json",
-							".git"
-						),
 					})
 				end,
 			},

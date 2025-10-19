@@ -48,12 +48,10 @@ return {
                     "c_sharp",
                     "cmake",
                     "csv",
-                    "latex",
                     "rust",
                     "scss",
                     "sql",
                     "toml",
-                    "bibtex",
                     "latex"
                 },
                 

@@ -21,7 +21,6 @@ return {
     -- Grammar checking
     "rhysd/vim-grammarous",
 
-
     -- Smooth scrolling with c-d and c-u
     { "karb94/neoscroll.nvim", opts = {} },
 
