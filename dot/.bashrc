@@ -175,18 +175,6 @@ if [[ $sys == 'aarch64' || $sys == 'armv7l' ]]; then
     PS1="\[\e[95m\]\u@\h\[\e[00m\] \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
 fi
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH=$BUN_INSTALL/bin:$PATH
-
-# pyenv
-if command -v pyenv > /dev/null 2>&1; then
-    export XDG_CONFIG_HOME="$HOME/.config"
-    export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv"
-    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-fi
-
 # FZF 
 if command -v fzf > /dev/null 2>&1; then
     eval "$(fzf --bash)"
